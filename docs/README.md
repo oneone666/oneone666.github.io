@@ -4,7 +4,7 @@ title: Home
 heroImage: https://oneone.com/assets/main-banner-visual-d048757b.png
 actions:
   - text: Get Started
-    link: /getting-started.html
+    link: /get-started.html
     type: primary
 
   - text: About Oneverse
