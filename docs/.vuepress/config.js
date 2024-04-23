@@ -1,18 +1,18 @@
-import { defaultTheme } from '@vuepress/theme-default'
-import { defineUserConfig } from 'vuepress/cli'
-import { viteBundler } from '@vuepress/bundler-vite'
+import { defaultTheme } from "@vuepress/theme-default";
+import { defineUserConfig } from "vuepress/cli";
+import { viteBundler } from "@vuepress/bundler-vite";
 
 export default defineUserConfig({
-  lang: 'en-US',
+  lang: "en-US",
 
-  title: 'VuePress',
-  description: 'My first VuePress Site',
+  title: "Oneverse",
+  description: "Your preferred digital payment solution partner.",
 
   theme: defaultTheme({
-    logo: 'https://vuejs.press/images/hero.png',
+    logo: "https://oneone.com/assets/logo-2-77da0a12.png",
 
-    navbar: ['/', '/get-started'],
+    navbar: ["/", "/get-started"],
   }),
 
   bundler: viteBundler(),
-})
+});
