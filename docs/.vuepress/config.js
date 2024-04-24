@@ -24,7 +24,7 @@ export default defineUserConfig({
       },
       { text: "Reference", children: ["/reference/payment-api.md"] },
     ],
-    repo: "oneverse/oneverse.github.io",
+    repo: "oneone666/oneone666.github.io",
   }),
 
   bundler: viteBundler(),
