@@ -48,7 +48,7 @@ Authenticate using UUID and password. Returns a token for subsequent requests.
 | error | string | Error message        |
 
 <CodeGroup>
-  <CodeGroupItem title="Example Response 200">
+  <CodeGroupItem title="200 OK">
 
 ```json
 {
@@ -57,7 +57,7 @@ Authenticate using UUID and password. Returns a token for subsequent requests.
 ```
 
   </CodeGroupItem>
-  <CodeGroupItem title="Example Response 401">
+  <CodeGroupItem title="401 Unauthorized">
 
 ```json
 {
@@ -90,7 +90,7 @@ Retrieve a list of all orders.
 | data  | array | List of orders |
 
 <CodeGroup>
-  <CodeGroupItem title="Example Response 200">
+  <CodeGroupItem title="200 OK">
 
 ```json
 {
@@ -174,7 +174,7 @@ Create a new order.
 | message | string | Status message |
 
 <CodeGroup>
-  <CodeGroupItem title="Example Response 201">
+  <CodeGroupItem title="201 Created">
 
 ```json
 {
@@ -199,7 +199,7 @@ Create a new order.
 ```
 
   </CodeGroupItem>
-  <CodeGroupItem title="Example Response 422">
+  <CodeGroupItem title="422 Unprocessable Content">
 
 ```json
 {
@@ -241,7 +241,7 @@ Retrieve details of a specific order.
 | order | object | Order data  |
 
 <CodeGroup>
-  <CodeGroupItem title="Example Response 200">
+  <CodeGroupItem title="200 OK">
 
 ```json
 {
@@ -264,7 +264,7 @@ Retrieve details of a specific order.
 ```
 
   </CodeGroupItem>
-  <CodeGroupItem title="Example Response 404">
+  <CodeGroupItem title="404 Not Found">
 
 ```json
 {
