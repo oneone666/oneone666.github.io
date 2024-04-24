@@ -1,23 +1,24 @@
+---
+lang: en-US
+title: Oneverse Payment API
+description: Oneverse Payment API documentation
+---
+
 # Payment API
 
 Our Payment API facilitates efficient management of your payments.
 
-## Endpoints
+::: tip
+All Payment API endpoints require authentication. Refer to the [Authentication](/guide/authentication.md) guide for details.
+:::
 
-The following endpoints are available for the Payment API:
+::: tip
+To sign your API requests with a secret key, follow the instructions in the [Signature Algorithm](/guide/signature-algorithm.md) guide.
+:::
 
-- [Login](/guide/payment.md#login)
-- [List Orders](/guide/payment.md#list-orders)
-- [Create Order](/guide/payment.md#create-order)
-- [Get Order](/guide/payment.md#get-order)
+## Table of Contents
 
-## Authentication
-
-All Payment API endpoints require authentication. Refer to the [Authentication](../authentication.md) guide for details.
-
-## Signature Algorithm
-
-To sign your API requests with a secret key, follow the instructions in the [Signature Algorithm](../signature-algorithm.md) guide.
+[[toc]]
 
 ## Rate Limiting
 
@@ -25,7 +26,7 @@ The Payment API enforces a rate limit of 60 requests per minute. Exceeding this 
 
 ## Errors
 
-Standard HTTP status codes are used by the Payment API to indicate the success or failure of an API request. For more information, see the [Errors](../errors.md) guide.
+Standard HTTP status codes are used by the Payment API to indicate the success or failure of an API request. For more information, see the [Errors](/guide/errors.md) guide.
 
 ## Endpoints
 
@@ -49,6 +50,8 @@ Authenticate using UUID and password. Returns a token for subsequent requests.
 }
 ```
 
+<hr>
+
 > 200 Response Fields
 
 | Field | Type   | Description          |
@@ -60,6 +63,7 @@ Authenticate using UUID and password. Returns a token for subsequent requests.
   "token": "123|lN7SSRDMDAvpJGve4VWabxanL5fZPN9vv6OCJ6IKee413ad8"
 }
 ```
+<hr>
 
 > 401 Response Fields
 
@@ -72,14 +76,13 @@ Authenticate using UUID and password. Returns a token for subsequent requests.
   "error": "Invalid credentials"
 }
 ```
+<hr>
 
 ### List Orders
 
-GET `/payment-api/transactions`
+GET `/payment-api/transactions` <Badge text="Requires authentication" type="warning"/>
 
 Retrieve a list of all orders.
-
-**_[Requires authentication]_**
 
 > Headers
 
@@ -116,13 +119,13 @@ Retrieve a list of all orders.
 }
 ```
 
+<hr>
+
 ### Create Order
 
-POST `/payment-api/transactions`
+POST `/payment-api/transactions` <Badge text="Requires authentication" type="warning"/>
 
 Create a new order.
-
-**_[Requires authentication]_**
 
 > Headers
 
@@ -162,6 +165,8 @@ Create a new order.
 }
 ```
 
+<hr>
+
 > 200 Response Fields
 
 | Field   | Type   | Description    |
@@ -192,13 +197,13 @@ Create a new order.
 }
 ```
 
+<hr>
+
 ### Get Order
 
-GET `/payment-api/transactions/{order_id}`
+GET `/payment-api/transactions/{order_id}` <Badge text="Requires authentication" type="warning"/>
 
 Retrieve details of a specific order.
-
-**_[Requires authentication]_**
 
 > Headers
 
@@ -212,6 +217,8 @@ Retrieve details of a specific order.
 | Parameter | Type   | Required | Description |
 | --------- | ------ | -------- | ----------- |
 | order_id  | string | yes      | Order ID    |
+
+<hr>
 
 > 200 Response Fields
 
@@ -238,6 +245,8 @@ Retrieve details of a specific order.
   }
 }
 ```
+
+<hr>
 
 ## Callbacks
 

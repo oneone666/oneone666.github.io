@@ -1,26 +1,28 @@
+---
+lang: en-US
+title: Get Started
+description: Oneverse API Overview
+---
+
 # Get Started
 
-This is a normal page, which contains VuePress basics.
+Oneverse offers a suite of APIs is designed to seamlessly integrate with your platform. This guide will walk you through getting started with our RESTful APIs.
 
-## Signature Algorithm
+To begin, [sign up][email] for an account to gain access to our APIs.
 
-Signature algorithm is used to sign your API request with a secret key to obtain additional security.
+Once your account is approved and you've obtained your access credentials, you'll use these credentials to authenticate your requests.
 
-See [Signature Algorithm][signatureAlgorithm] for more details.
+## Next Steps
 
-## Authentication
+Excited to dive in? Let's get started:
 
-Every API request except logins are [protected by auth token][authentication].
+1. **Explore Signature Algorithm:** Learn about our signature algorithm and how it adds an extra layer of security to your API requests. Check out the [Signature Algorithm][signatureAlgorithm] guide.
+2. **Authentication Made Easy:** Discover how to authenticate your requests seamlessly with our [Authentication][authentication] guide.
+3. **Streamline Payments with Payment API:** Simplify your payment management processes with our robust [Payment API][paymentApi].
 
-## Payment API
+Now you're all set to unleash the power of Oneverse API!
 
-We provide a [Payment API][paymentApi] to help you manage your payment.
-
-## Learn More about Oneverse
-
-By now, you should have a basic understanding of using out APIs. To learn more, please [contact us][email].
-
-[signatureAlgorithm]: /signature-algorithm.md
-[authentication]: /authentication.md
+[signatureAlgorithm]: /guide/signature-algorithm.md
+[authentication]: /guide/authentication.md
 [paymentApi]: /guide/payment.md
 [email]: mailto:tech@oneone.com

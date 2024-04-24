@@ -5,8 +5,9 @@ import { viteBundler } from "@vuepress/bundler-vite";
 export default defineUserConfig({
   lang: "en-US",
 
-  title: "Oneverse",
-  description: "Your preferred digital payment solution partner.",
+  title: "Oneverse for Developers",
+  description:
+    "Developer documentation for the most preferred digital payment solution partner.",
 
   theme: defaultTheme({
     logo: "https://oneone.com/assets/logo-2-77da0a12.png",

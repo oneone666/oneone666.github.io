@@ -1,9 +1,9 @@
 ---
 home: true
-title: Home
+title: Oneverse for Developers
 heroImage: https://oneone.com/assets/main-banner-visual-d048757b.png
 actions:
-  - text: Get Started
+  - text: Ready to begin?
     link: /get-started.html
     type: primary
 
