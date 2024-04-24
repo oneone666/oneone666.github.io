@@ -43,4 +43,4 @@ Example response of an invalid token:
 
 ## Next Steps
 
-Explore the [Payment API](/guide/payment.md) to streamline your payment processes.
+Explore the [Payment API](/reference/payment-api.md) to streamline your payment processes.

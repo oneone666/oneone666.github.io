@@ -24,5 +24,5 @@ Now you're all set to unleash the power of Oneverse API!
 
 [signatureAlgorithm]: /guide/signature-algorithm.md
 [authentication]: /guide/authentication.md
-[paymentApi]: /guide/payment.md
+[paymentApi]: /reference/payment-api.md
 [email]: mailto:tech@oneone.com
