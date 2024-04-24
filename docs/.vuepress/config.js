@@ -10,8 +10,8 @@ export default defineUserConfig({
 
   theme: defaultTheme({
     logo: "https://oneone.com/assets/logo-2-77da0a12.png",
-
     navbar: ["/", "/get-started"],
+    repo: "oneverse/oneverse.github.io",
   }),
 
   bundler: viteBundler(),
