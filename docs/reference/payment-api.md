@@ -16,18 +16,6 @@ All Payment API endpoints require authentication. Refer to the [Authentication](
 To sign your API requests with a secret key, follow the instructions in the [Signature Algorithm](/guide/signature-algorithm.md) guide.
 :::
 
-## Table of Contents
-
-[[toc]]
-
-## Rate Limiting
-
-The Payment API enforces a rate limit of 60 requests per minute. Exceeding this limit results in a 429 Too Many Requests response.
-
-## Errors
-
-Standard HTTP status codes are used by the Payment API to indicate the success or failure of an API request. For more information, see the [Errors](/guide/errors.md) guide.
-
 ## Endpoints
 
 ### Login
@@ -52,30 +40,34 @@ Authenticate using UUID and password. Returns a token for subsequent requests.
 
 <hr>
 
-> 200 Response Fields
+> Response Fields
 
 | Field | Type   | Description          |
 | ----- | ------ | -------------------- |
 | token | string | Authentication token |
+| error | string | Error message        |
+
+<CodeGroup>
+  <CodeGroupItem title="Example Response 200">
 
 ```json
 {
   "token": "123|lN7SSRDMDAvpJGve4VWabxanL5fZPN9vv6OCJ6IKee413ad8"
 }
 ```
-<hr>
 
-> 401 Response Fields
-
-| Field | Type   | Description   |
-| ----- | ------ | ------------- |
-| error | string | Error message |
+  </CodeGroupItem>
+  <CodeGroupItem title="Example Response 401">
 
 ```json
 {
   "error": "Invalid credentials"
 }
 ```
+
+  </CodeGroupItem>
+</CodeGroup>
+
 <hr>
 
 ### List Orders
@@ -91,11 +83,14 @@ Retrieve a list of all orders.
 | Authorization | string | yes      | Bearer token |
 | X-Signature   | string | yes      | Signature    |
 
-> 200 Response Fields
+> Response Fields
 
 | Field | Type  | Description    |
 | ----- | ----- | -------------- |
 | data  | array | List of orders |
+
+<CodeGroup>
+  <CodeGroupItem title="Example Response 200">
 
 ```json
 {
@@ -118,6 +113,9 @@ Retrieve a list of all orders.
   ]
 }
 ```
+
+  </CodeGroupItem>
+</CodeGroup>
 
 <hr>
 
@@ -167,13 +165,16 @@ Create a new order.
 
 <hr>
 
-> 200 Response Fields
+> Response Fields
 
 | Field   | Type   | Description    |
 | ------- | ------ | -------------- |
 | order   | object | Order data     |
 | code    | int    | Status code    |
 | message | string | Status message |
+
+<CodeGroup>
+  <CodeGroupItem title="Example Response 201">
 
 ```json
 {
@@ -196,6 +197,19 @@ Create a new order.
   "message": "Payment transaction created successfully."
 }
 ```
+
+  </CodeGroupItem>
+  <CodeGroupItem title="Example Response 422">
+
+```json
+{
+  "code": 4005,
+  "message": "The reference field is required."
+}
+```
+
+  </CodeGroupItem>
+</CodeGroup>
 
 <hr>
 
@@ -220,11 +234,14 @@ Retrieve details of a specific order.
 
 <hr>
 
-> 200 Response Fields
+> Response Fields
 
 | Field | Type   | Description |
 | ----- | ------ | ----------- |
 | order | object | Order data  |
+
+<CodeGroup>
+  <CodeGroupItem title="Example Response 200">
 
 ```json
 {
@@ -245,6 +262,20 @@ Retrieve details of a specific order.
   }
 }
 ```
+
+  </CodeGroupItem>
+  <CodeGroupItem title="Example Response 404">
+
+```json
+{
+  "code": 4006,
+  "message": "Transaction not found",
+  "request_id": "lg1x1MPC0AdvrmCeLBefTs2JaQJJcJIg"
+}
+```
+
+  </CodeGroupItem>
+</CodeGroup>
 
 <hr>
 

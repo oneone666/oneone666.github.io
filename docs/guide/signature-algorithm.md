@@ -108,6 +108,6 @@ Example response of an invalid signature:
 }
 ```
 
-## Next Steps
+#### Next Steps
 
 Learn to [authenticate](/guide/authentication.md) your requests.

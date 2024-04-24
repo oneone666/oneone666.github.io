@@ -41,6 +41,6 @@ Example response of an invalid token:
 }
 ```
 
-## Next Steps
+#### Next Steps
 
-Explore the [Payment API](/reference/payment-api.md) to streamline your payment processes.
+Read more about [Rate Limiting](/guide/rate-limiting.md) to manage your API usage efficiently.

@@ -18,6 +18,7 @@ export default defineUserConfig({
         children: [
           "/guide/signature-algorithm.md",
           "/guide/authentication.md",
+          "/guide/rate-limiting.md",
           "/guide/errors.md",
         ],
       },
