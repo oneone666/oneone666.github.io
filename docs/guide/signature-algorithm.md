@@ -2,12 +2,20 @@
 
 The signature algorithm adds an extra layer of security by signing your API requests with a secret key. This guide explains how to sign your requests and send them to the server.
 
+::: tip
+Your secret key, unique to your account, serves as your signature key and must be kept confidential.
+:::
+
 ## How It Works
 
 1. **Get your secret key:** First, get a secret key specific to your account.
 2. **Build the data string:** Construct the data string with the request method, URL, and payload.
 3. **Sign your request:** Use your secret key to sign the data string.
 4. **Send the signed request:** Transmit the signed request to the server.
+
+::: tip
+Ensure that you sign your requests using the `HMACSHA256` algorithm.
+:::
 
 ## Examples
 
@@ -28,14 +36,14 @@ If your request contains payload like this:
 
 Sort the payload's JSON keys alphabetically and compact it:
 
-```json
-{ "baz": "qux", "foo": "bar" }
+```plaintext
+{"baz":"qux","foo":"bar"}
 ```
 
 Construct the data string by concatenating the HTTP method, URL, and JSON-encoded payload in this format:
 
 ```plaintext
-<request-method>\n<url>\n<json-payload>
+<method>\n<url>\n<payload>
 ```
 
 For example, when sending a POST request to https://games.oneone.com/demo-api/orders with the provided payload, the data string should be:
@@ -59,7 +67,7 @@ The hashed value from the example should be `d46691367c13a98fe93e9cb2d4de6010792
 If your request does not contain a payload, construct the data string by concatenating the HTTP method and URL in this format:
 
 ```plaintext
-<request-method>\n<url>
+<method>\n<url>
 ```
 
 For instance, when sending a GET request to https://games.oneone.com/demo-api/orders, the data string should be:

@@ -12,6 +12,20 @@ To begin, [sign up][email] for an account to gain access to our APIs.
 
 Once your account is approved and you've obtained your access credentials, you'll use these credentials to authenticate your requests.
 
+## Environments
+
+| Environment | URL                      |
+| ----------- | ------------------------ |
+| Production  | https://games.oneone.com |
+| Sandbox     | N/A                      |
+
+## Data Format and Encoding
+The Oneverse API expects the payload data to be sent in JSON format and encoded in UTF-8.
+
+::: tip
+Ensure that the `Content-Type` header is set to `application/json` to indicate that the request body contains JSON data.
+:::
+
 ## Next Steps
 
 Excited to dive in? Let's get started:
