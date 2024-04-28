@@ -70,9 +70,9 @@ Authenticate using UUID and password. Returns a token for subsequent requests.
 
 <hr>
 
-### List Orders
+### List Orders <Badge text="Requires authentication" type="warning"/>
 
-GET `/payment-api/transactions` <Badge text="Requires authentication" type="warning"/>
+GET `/payment-api/transactions`
 
 Retrieve a list of all orders.
 
@@ -119,9 +119,9 @@ Retrieve a list of all orders.
 
 <hr>
 
-### Create Order
+### Create Order <Badge text="Requires authentication" type="warning"/>
 
-POST `/payment-api/transactions` <Badge text="Requires authentication" type="warning"/>
+POST `/payment-api/transactions`
 
 Create a new order.
 
@@ -213,9 +213,9 @@ Create a new order.
 
 <hr>
 
-### Get Order
+### Get Order <Badge text="Requires authentication" type="warning"/>
 
-GET `/payment-api/transactions/{order_id}` <Badge text="Requires authentication" type="warning"/>
+GET `/payment-api/transactions/{order_id}`
 
 Retrieve details of a specific order.
 
