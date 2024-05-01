@@ -1,19 +1,11 @@
 {
-  "name": "@oneone666/oneone666.github.io",
-  "version": "0.0.1",
-  "description": "Oneverse API documentation for developers",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "docs:build": "vuepress build docs --clean-cache --clean-temp",
-    "docs:clean-dev": "vuepress dev docs --clean-cache",
-    "docs:dev": "vuepress dev docs",
-    "docs:update-package": "pnpm dlx vp-update"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@vuepress/bundler-vite": "^2.0.0-rc.9",
-    "@vuepress/theme-default": "^2.0.0-rc.26",
-    "vue": "^3.4.24",
-    "vuepress": "^2.0.0-rc.9"
+    "vitepress": "^1.1.4"
+  },
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
   }
 }

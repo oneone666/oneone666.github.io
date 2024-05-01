@@ -1,7 +1,5 @@
 ---
-lang: en-US
-title: Oneverse Payment API
-description: Oneverse Payment API documentation
+outline: deep
 ---
 
 # Payment API
