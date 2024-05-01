@@ -22,12 +22,14 @@ POST `/payment-api/login`
 
 Authenticate using UUID and password. Returns a token for subsequent requests.
 
-> Body Parameters
+::: details Body Parameters
 
 | Parameter | Type   | Required | Description |
 | --------- | ------ | -------- | ----------- |
 | login     | string | yes      | UUID        |
 | password  | string | yes      | Password    |
+
+:::
 
 ```json
 {
@@ -36,37 +38,32 @@ Authenticate using UUID and password. Returns a token for subsequent requests.
 }
 ```
 
-<hr>
-
-> Response Fields
+::: details Response Fields
 
 | Field | Type   | Description          |
 | ----- | ------ | -------------------- |
 | token | string | Authentication token |
 | error | string | Error message        |
 
-<CodeGroup>
-  <CodeGroupItem title="200 OK">
+:::
 
-```json
+::: code-group
+
+```json [200]
 {
   "token": "123|lN7SSRDMDAvpJGve4VWabxanL5fZPN9vv6OCJ6IKee413ad8"
 }
 ```
 
-  </CodeGroupItem>
-  <CodeGroupItem title="401 Unauthorized">
-
-```json
+```json [401]
 {
   "error": "Invalid credentials"
 }
 ```
 
-  </CodeGroupItem>
-</CodeGroup>
+:::
 
-<hr>
+<hr />
 
 ### List Orders <Badge text="Requires authentication" type="warning"/>
 
@@ -74,23 +71,26 @@ GET `/payment-api/transactions`
 
 Retrieve a list of all orders.
 
-> Headers
+::: details Headers
 
 | Header        | Type   | Required | Description  |
 | ------------- | ------ | -------- | ------------ |
 | Authorization | string | yes      | Bearer token |
 | X-Signature   | string | yes      | Signature    |
 
-> Response Fields
+:::
+
+::: details Response Fields
 
 | Field | Type  | Description    |
 | ----- | ----- | -------------- |
 | data  | array | List of orders |
 
-<CodeGroup>
-  <CodeGroupItem title="200 OK">
+:::
 
-```json
+::: code-group
+
+```json [200]
 {
   "data": [
     {
@@ -112,10 +112,9 @@ Retrieve a list of all orders.
 }
 ```
 
-  </CodeGroupItem>
-</CodeGroup>
+:::
 
-<hr>
+<hr />
 
 ### Create Order <Badge text="Requires authentication" type="warning"/>
 
@@ -123,14 +122,16 @@ POST `/payment-api/transactions`
 
 Create a new order.
 
-> Headers
+::: details Headers
 
 | Header        | Type   | Required | Description  |
 | ------------- | ------ | -------- | ------------ |
 | Authorization | string | yes      | Bearer token |
 | X-Signature   | string | yes      | Signature    |
 
-> Body Parameters
+:::
+
+::: details Body Parameters
 
 | Parameter               | Type   | Required | Description                       |
 | ----------------------- | ------ | -------- | --------------------------------- |
@@ -147,6 +148,8 @@ Create a new order.
 | item_code               | string | no       | Item code                         |
 | merchant_return_url     | string | yes      | Merchant return URL               |
 
+:::
+
 ```json
 {
   "reference": "569c420e-5739-3eb5-b52a-9a51ce38f0ba",
@@ -161,9 +164,7 @@ Create a new order.
 }
 ```
 
-<hr>
-
-> Response Fields
+::: details Response Fields
 
 | Field   | Type   | Description    |
 | ------- | ------ | -------------- |
@@ -171,10 +172,11 @@ Create a new order.
 | code    | int    | Status code    |
 | message | string | Status message |
 
-<CodeGroup>
-  <CodeGroupItem title="201 Created">
+:::
 
-```json
+::: code-group
+
+```json [201]
 {
   "order": {
     "order_id": "01HW4S5YXS7GARVFX3PEVRRDS4",
@@ -196,20 +198,16 @@ Create a new order.
 }
 ```
 
-  </CodeGroupItem>
-  <CodeGroupItem title="422 Unprocessable Content">
-
-```json
+```json [422]
 {
   "code": 4005,
   "message": "The reference field is required."
 }
 ```
 
-  </CodeGroupItem>
-</CodeGroup>
+:::
 
-<hr>
+<hr />
 
 ### Get Order <Badge text="Requires authentication" type="warning"/>
 
@@ -217,31 +215,34 @@ GET `/payment-api/transactions/{order_id}`
 
 Retrieve details of a specific order.
 
-> Headers
+::: details Headers
 
 | Header        | Type   | Required | Description  |
 | ------------- | ------ | -------- | ------------ |
 | Authorization | string | yes      | Bearer token |
 | X-Signature   | string | yes      | Signature    |
 
-> URL Parameters
+:::
+
+::: details URL Parameters
 
 | Parameter | Type   | Required | Description |
 | --------- | ------ | -------- | ----------- |
 | order_id  | string | yes      | Order ID    |
 
-<hr>
+:::
 
-> Response Fields
+::: details Response Fields
 
 | Field | Type   | Description |
 | ----- | ------ | ----------- |
 | order | object | Order data  |
 
-<CodeGroup>
-  <CodeGroupItem title="200 OK">
+:::
 
-```json
+::: code-group
+
+```json [200]
 {
   "order": {
     "order_id": "01HW4S5YXS7GARVFX3PEVRRDS4",
@@ -261,10 +262,7 @@ Retrieve details of a specific order.
 }
 ```
 
-  </CodeGroupItem>
-  <CodeGroupItem title="404 Not Found">
-
-```json
+```json [404]
 {
   "code": 4006,
   "message": "Transaction not found",
@@ -272,10 +270,7 @@ Retrieve details of a specific order.
 }
 ```
 
-  </CodeGroupItem>
-</CodeGroup>
-
-<hr>
+:::
 
 ## Callbacks
 
