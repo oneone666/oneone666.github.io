@@ -1,0 +1,14 @@
+:root {
+  --vp-c-oneverse: rgb(245 158 11);
+}
+
+.dark {
+  --vp-c-oneverse: rgb(245 158 11);
+}
+
+:root {
+  --vp-c-brand-1: var(--vp-c-oneverse);
+  --vp-c-brand-2: var(--vp-c-yellow-1);
+  --vp-c-brand-3: var(--vp-c-oneverse);
+}
+

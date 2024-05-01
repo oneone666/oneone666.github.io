@@ -4,12 +4,10 @@ Oneverse is a platform that provides APIs for game developers to create and mana
 
 ## Installation
 
-Package manager (pnpm, yarn or npm) is required to install the dependencies.
+Package manager (bun, pnpm, yarn or npm) is required to install the dependencies. Here are examples of how tos using bun:
 
 ```bash
-pnpm install
-yarn add
-npm install
+bun install
 ```
 
 ## Development
@@ -17,9 +15,7 @@ npm install
 To start the server, run the following command:
 
 ```bash
-pnpm docs:dev
-yarn docs:dev
-npm run docs:dev
+bun run docs:dev
 ```
 
 ## Building the site
@@ -27,7 +23,5 @@ npm run docs:dev
 To build the site, run the following command:
 
 ```bash
-pnpm docs:build
-yarn docs:build
-npm run docs:build
+bun run docs:build
 ```
