@@ -4,6 +4,7 @@ export default defineConfig({
   lang: "en-US",
   title: "Oneverse for Developers",
   description: "Oneverse API Documentations",
+  lastUpdated: true,
   themeConfig: {
     logo: "https://oneone.com/assets/logo-2-77da0a12.png",
 
@@ -67,7 +68,7 @@ export default defineConfig({
     footer: {
       message: "Oneverse for Developers",
       copyright:
-        'Copyright © 2023-present <a href="https://oneone.com?ref=oneone66.github.io" target="_blank" rel="noreferrer">Oneverse Technology</a>',
+        'Copyright © 2023-present <a href="https://oneone.com?ref=oneone66" target="_blank" rel="noreferrer">Oneverse Technology</a>',
     },
 
     socialLinks: [
@@ -76,5 +77,9 @@ export default defineConfig({
         link: "https://github.com/oneone666/oneone666.github.io",
       },
     ],
+
+    search: {
+      provider: "local",
+    },
   },
 });

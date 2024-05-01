@@ -12,3 +12,6 @@
   --vp-c-brand-3: var(--vp-c-oneverse);
 }
 
+.vp-doc hr {
+  margin: 32px 0;
+}

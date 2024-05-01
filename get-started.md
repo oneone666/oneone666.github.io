@@ -13,7 +13,7 @@ To begin, [sign up][email] for an account to gain access to our APIs.
 Once your account is approved and you've obtained your access credentials, you'll use these credentials to authenticate your requests.
 
 ::: tip
- Have you noticed an issue with our API? Please email [us][email]. We're here to help!
+ Have you noticed an issue with our API? Please [email us][email]. We're here to help!
 :::
 
 ## Convention
