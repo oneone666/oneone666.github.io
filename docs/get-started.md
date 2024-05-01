@@ -12,6 +12,17 @@ To begin, [sign up][email] for an account to gain access to our APIs.
 
 Once your account is approved and you've obtained your access credentials, you'll use these credentials to authenticate your requests.
 
+::: tip
+ Have you noticed an issue with our API? Please email [us][email]. We're here to help!
+:::
+
+## Convention
+
+* All API requests are made via HTTPS.
+* All requests should include the `Accept: application/json` header.
+* All responses are returned in JSON format.
+* Currency is represented in cents. For example, $1.00 is represented as `100`.
+
 ## Environments
 
 | Environment | URL                      |
