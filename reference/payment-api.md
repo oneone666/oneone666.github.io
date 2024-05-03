@@ -138,7 +138,7 @@ Create a new order.
 | merchant_transaction_id | string | yes      | Unique reference                  |
 | merchant_uuid           | string | yes      | Merchant UUID                     |
 | game_name               | string | yes      | Game name                         |
-| game_character          | string | no       | Game character ID                 |
+| account_info            | array  | no       | Game account info                 |
 | country                 | string | yes      | Country code in iso_3166_2 format |
 | payment_channel         | string | yes      | Payment channel                   |
 | amount_cents            | int    | yes      | Amount in cents                   |
@@ -155,12 +155,17 @@ Create a new order.
   "reference": "569c420e-5739-3eb5-b52a-9a51ce38f0ba",
   "merchant_uuid": "25f0a63d-568f-3101-8181-86a595396e5d",
   "game_name": "ragnarok-origin-global",
+  "account_info": {
+    "serverName": "Prontera",
+    "loginId": "FGHJK1234",
+    "name": "Kuro"
+  },
   "payment_channel": "for_testing",
   "amount_cents": 10000,
   "currency": "MYR",
   "title": "Payment for game",
   "description": "Payment for game",
-  "item_code": null
+  "item_code": "XTY123",
 }
 ```
 
