@@ -14,7 +14,7 @@ hero:
       link: /get-started
     - theme: alt
       text: Oneverse
-      link: https://oneone.com?ref=oneone66
+      link: https://oneone.com?ref=docs
     - theme: alt
       text: GitHub
       link: https://github.com/oneone666
@@ -56,24 +56,38 @@ features:
 
 footer: Copyright © 2023-present Oneverse Technology all rights reserved
 ---
+<style>
+:root {
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #fdb140 30%, #f83026);
 
-Are you interested in discovering what our business has to offer? [Learn more][oneverse-home]
+  --vp-home-hero-image-background-image: linear-gradient(-45deg, #bd34fe 30%, #47caff 70%);
+  --vp-home-hero-image-filter: blur(44px);
+}
 
-::: info 🚀 About Oneverse
+@media (min-width: 640px) {
+  :root {
+    --vp-home-hero-image-filter: blur(36px);
+  }
+}
 
-Do you have a passion for technology and a desire to develop cutting-edge payment systems? Would you like to join [a team][teams] that is making a significant impact?
-
-Please [contact us][contact] today!
-
-:::
-
-[oneverse-home]: https://oneone.com?ref=oneone66
-[contact]: https://oneone.com/#contact-us
-[teams]: /teams
-
-<style module>
-.VPButton.brand {
-  color: red;
-  font-weight: bold;
+@media (min-width: 960px) {
+  :root {
+    --vp-home-hero-image-filter: blur(54px);
+  }
 }
 </style>
+
+::: warning 🚀 About Oneverse
+Are you interested in discovering what our business has to offer? [Learn more][oneverse-home]
+:::
+
+::: info 📢 We are hiring!
+> Do you have a passion for technology and a desire to develop cutting-edge payment systems?
+
+If so, we would love to hear from you! [Contact us][contact] today. Meet our [team][team].
+:::
+
+[oneverse-home]: https://oneone.com?ref=docs
+[contact]: https://oneone.com/#contact-us
+[team]: /team

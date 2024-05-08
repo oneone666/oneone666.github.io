@@ -5,6 +5,42 @@ export default defineConfig({
   title: "Oneverse for Developers",
   description: "Oneverse API Documentations",
   lastUpdated: true,
+  head: [
+    [
+      "link",
+      {
+        rel: "apple-touch-icon",
+        type: "image/png",
+        sizes: "180x180",
+        href: "/apple-touch-icon.png",
+      },
+    ],
+    [
+      "link",
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        href: "/favicon-32x32.png",
+      },
+    ],
+    [
+      "link",
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "16x16",
+        href: "/favicon-16x16.png",
+      },
+    ],
+    [
+      "link",
+      {
+        rel: "manifest",
+        href: "/site.webmanifest",
+      },
+    ],
+  ],
   themeConfig: {
     logo: "https://oneone.com/assets/logo-2-77da0a12.png",
 
@@ -68,7 +104,7 @@ export default defineConfig({
     footer: {
       message: "Oneverse for Developers",
       copyright:
-        'Copyright © 2023-present <a href="https://oneone.com?ref=oneone66" target="_blank" rel="noreferrer">Oneverse Technology</a>',
+        'Copyright © 2023-present <a href="https://oneone.com?ref=docs" target="_blank" rel="noreferrer">Oneverse Technology</a>',
     },
 
     socialLinks: [
