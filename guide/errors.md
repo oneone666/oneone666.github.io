@@ -18,16 +18,19 @@ The following HTTP status codes are used in the response of the payment API.
 
 The following error codes are used in the response of the payment API.
 
-| Error Code | Description              |
-| ---------- | ------------------------ |
-| 2000       | Success                  |
-| 2001       | Transaction created      |
-| 2002       | Callback accepted        |
-| 4000       | Unknown error            |
-| 4001       | Too many request         |
-| 4002       | Missing signature header |
-| 4003       | Invalid HMAC signature   |
-| 4004       | Invalid token            |
-| 4005       | Validation failed        |
-| 4006       | Transaction not found    |
-| 5001       | Payment failed           |
+| Error Code            | Description              |
+| --------------------- | ------------------------ |
+| UNKNOWN_ERROR         | Unknown error            |
+| UNAUTHORIZED          | Unauthorized request     |
+| TOO_MANY_REQUESTS     | Too many request         |
+| MISSING_HMAC          | Missing signature header |
+| INVALID_HMAC          | Invalid HMAC signature   |
+| VALIDATION_ERROR      | Validation failed        |
+| UNPROCESSABLE_CONTENT | Validation error         |
+| RESOURCE_NOT_FOUND    | Resource not found       |
+| PAYMENT_ERROR         | Payment failed           |
+| LIST_ERROR            | List resources error     |
+| SHOW_ERROR            | Show resource error      |
+| CREATE_ERROR          | Create resource error    |
+| UPDATE_ERROR          | Update resource error    |
+| DELETE_ERROR          | Delete resource error    |

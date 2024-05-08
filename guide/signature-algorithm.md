@@ -107,12 +107,31 @@ Always sort the payload's JSON keys.
 
 An invalid signature will result in a `403 Unauthorized` response. Ensure that the signature is correctly generated and included in the request header.
 
+Example response of missing signature:
+
+```json
+{
+  "status": "error",
+  "code": 403,
+  "error": {
+    "code": "MISSING_HMAC",
+    "message": "Missing HMAC header"
+  },
+  "data": null
+}
+```
+
 Example response of an invalid signature:
 
 ```json
 {
-  "code": 4003,
-  "error": "Invalid HMAC hash"
+  "status": "error",
+  "code": 403,
+  "error": {
+    "code": "INVALID_HMAC",
+    "message": "Invalid HMAC hash"
+  },
+  "data": null
 }
 ```
 

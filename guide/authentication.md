@@ -36,8 +36,13 @@ Example response of an invalid token:
 
 ```json
 {
-  "code": 4000,
-  "error": "Unauthenticated"
+  "status": "error",
+  "code": 401,
+  "error": {
+    "code": "UNAUTHORIZED",
+    "message": "Unauthenticated."
+  },
+  "data": null
 }
 ```
 

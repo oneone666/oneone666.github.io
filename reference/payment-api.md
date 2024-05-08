@@ -51,13 +51,40 @@ Authenticate using UUID and password. Returns a token for subsequent requests.
 
 ```json [200]
 {
-  "token": "123|lN7SSRDMDAvpJGve4VWabxanL5fZPN9vv6OCJ6IKee413ad8"
+  "status": "success",
+  "code": 200,
+  "error": null,
+  "data": {
+    "token": "234|MUcPNPf2mS30sXbUSWBCnuVWEeNmgHb3oSCjiWzv0a46ede0"
+  }
 }
 ```
 
 ```json [401]
 {
-  "error": "Invalid credentials"
+  "status": "error",
+  "code": 401,
+  "error": {
+    "code": "UNAUTHORIZED",
+    "message": "Invalid credentials"
+  },
+  "data": null
+}
+```
+
+```json [422]
+{
+  "status": "error",
+  "code": 422,
+  "error": {
+    "code": "UNPROCESSABLE_CONTENT",
+    "message": "The login field is required. (and 1 more error)",
+    "errors": {
+      "login": ["The login field is required."],
+      "password": ["The password field is required."]
+    }
+  },
+  "data": null
 }
 ```
 
@@ -82,9 +109,11 @@ Retrieve a list of all orders.
 
 ::: details Response Fields
 
-| Field | Type  | Description    |
-| ----- | ----- | -------------- |
-| data  | array | List of orders |
+| Field | Type  | Description                                                      |
+| ----- | ----- | ---------------------------------------------------------------- |
+| data  | array | List of [`Order Transaction`](#order-transaction-object) objects |
+| links | array | Pagination links                                                 |
+| meta  | array | Pagination metadata                                              |
 
 :::
 
@@ -92,23 +121,55 @@ Retrieve a list of all orders.
 
 ```json [200]
 {
+  "status": "success",
+  "code": 200,
+  "error": null,
   "data": [
     {
-      "order_id": "01HW4S5YXS7GARVFX3PEVRRDS4",
-      "reference": "569c420e-5739-3eb5-b52a-9a51ce38f0ba",
-      "merchant_uuid": "25f0a63d-568f-3101-8181-86a595396e5d",
+      "object": "payment_transaction",
+      "order_id": "01HXBENQCRV4W42NE4WC98QTGY",
+      "reference": "reference-1234",
+      "merchant_uuid": "9bfdea04-d4c8-4f44-aa58-ff622d1285bf",
       "game_name": "ragnarok-origin-global",
-      "payment_channel": "for_testing",
-      "amount_cents": 10000,
+      "payment_channel": "qr_promptpay_thb",
+      "amount_cents": 1000,
       "currency": "MYR",
-      "title": "Payment for game",
-      "description": "Payment for game",
-      "item_code": null,
-      "status": "expired",
-      "paylink": "https://games.oneone.com/payment-api/orders/01HW4S5YXS7GARVFX3PEVRRDS4",
-      "verify_url": "https://games.oneone.com/payment-api/transactions/01HW4S5YXS7GARVFX3PEVRRDS4"
+      "title": "Nyan Berry Pack (24,000)",
+      "description": "Ragnarok Origin",
+      "item_code": "roo-item-246",
+      "status": "created",
+      "paylink": "https://games.oneone.com/payment-api/orders/01HXBENQCRV4W42NE4WC98QTGY",
+      "verify_url": "https://games.oneone.com/payment-api/transactions/01HXBENQCRV4W42NE4WC98QTGY"
     }
-  ]
+  ],
+  "links": {
+    "first": "https://games.oneone.com/payment-api/transactions?page=1",
+    "last": "https://games.oneone.com/payment-api/transactions?page=1",
+    "prev": null,
+    "next": null
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 1,
+    "path": "https://games.oneone.com/payment-api/transactions",
+    "per_page": 20,
+    "to": 1,
+    "total": 1
+  }
+}
+```
+
+```json [500]
+{
+  "status": "error",
+  "code": 500,
+  "error": {
+    "code": "LIST_ERROR",
+    "message": "Failed to retrieve list of resources",
+    "tracking": "e61d7830-ec2f-4c7e-91fc-4cc3bef19865"
+  },
+  "data": null
 }
 ```
 
@@ -152,30 +213,30 @@ Create a new order.
 
 ```json
 {
-  "reference": "569c420e-5739-3eb5-b52a-9a51ce38f0ba",
-  "merchant_uuid": "25f0a63d-568f-3101-8181-86a595396e5d",
+  "merchant_transaction_id": "testing123",
+  "merchant_uuid": "9bfdea04-d4c8-4f44-aa58-ff622d1285bf",
   "game_name": "ragnarok-origin-global",
   "account_info": {
     "serverName": "Prontera",
     "loginId": "FGHJK1234",
     "name": "Kuro"
   },
-  "payment_channel": "for_testing",
-  "amount_cents": 10000,
+  "payment_channel": "qr_promptpay_thb",
+  "country": "MY",
+  "amount_cents": "1000",
   "currency": "MYR",
-  "title": "Payment for game",
-  "description": "Payment for game",
-  "item_code": "XTY123",
+  "title": "Nyan Berry Pack (24,000)",
+  "description": "Ragnarok Origin",
+  "item_code": "roo-item-246",
+  "merchant_return_url": "https://example.com"
 }
 ```
 
 ::: details Response Fields
 
-| Field   | Type   | Description    |
-| ------- | ------ | -------------- |
-| order   | object | Order data     |
-| code    | int    | Status code    |
-| message | string | Status message |
+| Field | Type   | Description                                             |
+| ----- | ------ | ------------------------------------------------------- |
+| data  | object | [`Order Transaction`](#order-transaction-object) object |
 
 :::
 
@@ -183,30 +244,53 @@ Create a new order.
 
 ```json [201]
 {
-  "order": {
-    "order_id": "01HW4S5YXS7GARVFX3PEVRRDS4",
-    "reference": "569c420e-5739-3eb5-b52a-9a51ce38f0ba",
-    "merchant_uuid": "25f0a63d-568f-3101-8181-86a595396e5d",
+  "status": "success",
+  "code": 201,
+  "error": null,
+  "data": {
+    "object": "payment_transaction",
+    "order_id": "01HXBENQCRV3W42NE4WC38QTGY",
+    "reference": null,
+    "merchant_uuid": "9bfdea14-d4c8-4f34-aa58-ff621d1285bf",
     "game_name": "ragnarok-origin-global",
-    "payment_channel": "for_testing",
-    "amount_cents": 10000,
+    "payment_channel": "qr_promptpay_thb",
+    "amount_cents": 1000,
     "currency": "MYR",
-    "title": "Payment for game",
-    "description": "Payment for game",
-    "item_code": null,
-    "status": "pending",
-    "paylink": "https://games.oneone.com/payment-api/orders/01HW4S5YXS7GARVFX3PEVRRDS4",
-    "verify_url": "https://games.oneone.com/payment-api/transactions/01HW4S5YXS7GARVFX3PEVRRDS4"
-  },
-  "code": 2001,
-  "message": "Payment transaction created successfully."
+    "title": "Nyan Berry Pack (24,000)",
+    "description": "Ragnarok Origin",
+    "item_code": "roo-item-246",
+    "status": "created",
+    "paylink": "https://games.oneone.com/payment-api/orders/01HXBENQCRV4W42NE4WC98QTGY",
+    "verify_url": "https://games.oneone.com/payment-api/transactions/01HXBENQCRV4W42NE4WC98QTGY"
+  }
 }
 ```
 
 ```json [422]
 {
-  "code": 4005,
-  "message": "The reference field is required."
+  "status": "error",
+  "code": 422,
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "The selected payment channel is invalid.",
+    "errors": {
+      "payment_channel": "The selected payment channel is invalid."
+    }
+  },
+  "data": null
+}
+```
+
+```json [500]
+{
+  "status": "error",
+  "code": 500,
+  "error": {
+    "code": "CREATE_ERROR",
+    "message": "Failed to create resource",
+    "tracking": "50e10f6c-3524-411d-a73f-bdbde4b37f10"
+  },
+  "data": null
 }
 ```
 
@@ -239,9 +323,9 @@ Retrieve details of a specific order.
 
 ::: details Response Fields
 
-| Field | Type   | Description |
-| ----- | ------ | ----------- |
-| order | object | Order data  |
+| Field | Type   | Description                                             |
+| ----- | ------ | ------------------------------------------------------- |
+| order | object | [`Order Transaction`](#order-transaction-object) object |
 
 :::
 
@@ -249,29 +333,50 @@ Retrieve details of a specific order.
 
 ```json [200]
 {
-  "order": {
-    "order_id": "01HW4S5YXS7GARVFX3PEVRRDS4",
-    "reference": "569c420e-5739-3eb5-b52a-9a51ce38f0ba",
-    "merchant_uuid": "25f0a63d-568f-3101-8181-86a595396e5d",
+  "status": "success",
+  "code": 200,
+  "error": null,
+  "data": {
+    "object": "payment_transaction",
+    "order_id": "01HXBENQCRV4W42NE4WC98QTGY",
+    "reference": null,
+    "merchant_uuid": "9bfdea04-d4c8-4f44-aa58-ff622d1285bf",
     "game_name": "ragnarok-origin-global",
-    "payment_channel": "for_testing",
-    "amount_cents": 10000,
+    "payment_channel": "qr_promptpay_thb",
+    "amount_cents": 1000,
     "currency": "MYR",
-    "title": "Payment for game",
-    "description": "Payment for game",
-    "item_code": null,
-    "status": "pending",
-    "paylink": "https://games.oneone.com/payment-api/orders/01HW4S5YXS7GARVFX3PEVRRDS4",
-    "verify_url": "https://games.oneone.com/payment-api/transactions/01HW4S5YXS7GARVFX3PEVRRDS4"
+    "title": "Nyan Berry Pack (24,000)",
+    "description": "Ragnarok Origin",
+    "item_code": "roo-item-246",
+    "status": "created",
+    "paylink": "https://games.oneone.com/payment-api/orders/01HXBENQCRV4W42NE4WC98QTGY",
+    "verify_url": "https://games.oneone.com/payment-api/transactions/01HXBENQCRV4W42NE4WC98QTGY"
   }
 }
 ```
 
 ```json [404]
 {
-  "code": 4006,
-  "message": "Transaction not found",
-  "request_id": "lg1x1MPC0AdvrmCeLBefTs2JaQJJcJIg"
+  "status": "error",
+  "code": 404,
+  "error": {
+    "code": "RESOURCE_NOT_FOUND",
+    "message": "Resource not found"
+  },
+  "data": null
+}
+```
+
+```json [500]
+{
+  "status": "error",
+  "code": 500,
+  "error": {
+    "code": "SHOW_ERROR",
+    "message": "Failed to retrieve resource",
+    "tracking": "01cf630e-7f9c-49a3-badd-238ea7da7a72"
+  },
+  "data": null
 }
 ```
 
@@ -281,7 +386,7 @@ Retrieve details of a specific order.
 
 ### Payment Success Callback
 
-After a successful payment, the transaction status will be updated to "paid". We will send a POST request to your callback URL with the transaction resource as payload in JSON format:
+After a successful payment, the transaction status will be updated to "paid". We will send a POST request to your callback URL with the [`Order Transaction`](#order-transaction-object) object as payload in JSON format:
 
 ```json
 {
@@ -290,7 +395,7 @@ After a successful payment, the transaction status will be updated to "paid". We
   "merchant_uuid": "25f0a63d-568f-3101-8181-86a595396e5d",
   "game_name": "ragnarok-origin-global",
   "payment_channel": "for_testing",
-  "amount_cents": 10000,
+  "amount_cents": 1000,
   "currency": "MYR",
   "title": "Payment for game",
   "description": "Payment for game",
@@ -302,3 +407,43 @@ After a successful payment, the transaction status will be updated to "paid". We
 ```
 
 Ensure that your callback URL returns a 200 status code upon successful processing. We will retry the callback up to 3 times if it fails.
+
+## Order Transaction Object
+
+| Field           | Type   | Description      |
+| --------------- | ------ | ---------------- |
+| object          | string | Object type      |
+| order_id        | string | Order ID         |
+| reference       | string | Unique reference |
+| merchant_uuid   | string | Merchant UUID    |
+| game_name       | string | Game name        |
+| payment_channel | string | Payment channel  |
+| amount_cents    | int    | Amount in cents  |
+| currency        | string | Currency         |
+| title           | string | Title            |
+| description     | string | Description      |
+| item_code       | string | Item code        |
+| status          | string | Order status     |
+| paylink         | string | Payment link     |
+| verify_url      | string | Verification URL |
+
+Example object:
+
+```json
+{
+  "object": "payment_transaction",
+  "order_id": "01HXBGYT0GAGKV5QVTR1PQ4HJC",
+  "reference": null,
+  "merchant_uuid": "9bfdea04-d4c8-4f44-aa58-ff622d1285bf",
+  "game_name": "ragnarok-origin-global",
+  "payment_channel": "qr_promptpay_thb",
+  "amount_cents": 1000,
+  "currency": "MYR",
+  "title": "Nyan Berry Pack (24,000)",
+  "description": "Ragnarok Origin",
+  "item_code": "roo-item-246",
+  "status": "created",
+  "paylink": "https://games.oneone.com/payment-api/orders/01HXBGYT0GAGKV5QVTR1PQ4HJC",
+  "verify_url": "https://games.oneone.com/payment-api/transactions/01HXBGYT0GAGKV5QVTR1PQ4HJC"
+}
+```
