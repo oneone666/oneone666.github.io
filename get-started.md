@@ -43,11 +43,11 @@ Excited to dive in? Let's get started:
 
 1. **Explore Signature Algorithm:** Learn about our signature algorithm and how it adds an extra layer of security to your API requests. Check out the [Signature Algorithm][signatureAlgorithm] guide.
 2. **Authentication Made Easy:** Discover how to authenticate your requests seamlessly with our [Authentication][authentication] guide.
-3. **Streamline Payments with Payment API:** Simplify your payment management processes with our robust [Payment API][paymentApi].
+3. **Streamline Payments with Southbound API:** Simplify your payment management processes with our robust [Southbound API][paymentApi].
 
 Now you're all set to unleash the power of Oneverse API!
 
 [signatureAlgorithm]: /guide/signature-algorithm.md
 [authentication]: /guide/authentication.md
-[paymentApi]: /reference/payment-api.md
+[paymentApi]: /reference/southbound-api.md
 [email]: mailto:tech@oneone.com

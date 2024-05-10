@@ -26,4 +26,4 @@ The `X-RateLimit-Remaining` header indicates the number of requests that can sti
 
 #### Next Steps
 
-Explore the [Payment API](/reference/payment-api.md) to streamline your payment processes.
+Explore the [Southbound API](/reference/southbound-api.md) to streamline your payment processes.

@@ -2,9 +2,9 @@
 outline: deep
 ---
 
-# Reseller API
+# Northbound API
 
-Our Reseller API facilitates efficient management of your payments.
+Our Northbound API facilitates efficient management of your payments.
 
 ::: tip
 All Payment API endpoints require authentication. Refer to the [Authentication](/guide/authentication.md) guide for details.
@@ -18,7 +18,7 @@ To sign your API requests with a secret key, follow the instructions in the [Sig
 
 ### Login
 
-POST `/reseller-api/login`
+POST `/northbound-api/login`
 
 Authenticate using email and password. Returns a token for subsequent requests.
 
@@ -95,7 +95,7 @@ Authenticate using email and password. Returns a token for subsequent requests.
 
 ### List Games <Badge text="Requires authentication" type="warning"/>
 
-GET `/reseller-api/games`
+GET `/northbound-api/games`
 
 Retrieve a list of all available games.
 
@@ -153,7 +153,7 @@ Retrieve a list of all available games.
 
 ### Show Game Info <Badge text="Requires authentication" type="warning"/>
 
-GET `/reseller-api/games/{uuid}`
+GET `/northbound-api/games/{uuid}`
 
 Retrieve details of a specific order.
 
@@ -229,7 +229,7 @@ Retrieve details of a specific order.
 
 ### List Game Servers <Badge text="Requires authentication" type="warning"/>
 
-GET `/reseller-api/games/{uuid}/servers`
+GET `/northbound-api/games/{uuid}/servers`
 
 Retrieve a list of all available games.
 
@@ -300,7 +300,7 @@ Retrieve a list of all available games.
 
 ### List Game Items <Badge text="Requires authentication" type="warning"/>
 
-GET `/reseller-api/games/{uuid}/items`
+GET `/northbound-api/games/{uuid}/items`
 
 Retrieve a list of all available games.
 
@@ -379,7 +379,7 @@ Retrieve a list of all available games.
 
 ### List Game Characters <Badge text="Requires authentication" type="warning"/>
 
-GET `/reseller-api/games/{uuid}/characters`
+GET `/northbound-api/games/{uuid}/characters`
 
 Retrieve a list of game characters.
 
@@ -450,7 +450,7 @@ Retrieve a list of game characters.
 
 ### Create Order <Badge text="Requires authentication" type="warning"/>
 
-POST `/reseller-api/orders`
+POST `/northbound-api/orders`
 
 Create a new order.
 
@@ -552,7 +552,7 @@ Create a new order.
 
 ### Get Order <Badge text="Requires authentication" type="warning"/>
 
-GET `/reseller-api/orders/{order_id}`
+GET `/northbound-api/orders/{order_id}`
 
 Retrieve details of a specific order.
 
@@ -636,7 +636,7 @@ Retrieve details of a specific order.
 
 ### Confirm Order <Badge text="Requires authentication" type="warning"/>
 
-POST `/reseller-api/orders/{transaction_id}`
+POST `/northbound-api/orders/{transaction_id}`
 
 Retrieve details of a specific order.
 
@@ -719,7 +719,7 @@ Retrieve details of a specific order.
 
 ### Get Wallet Balance <Badge text="Requires authentication" type="warning"/>
 
-GET `/reseller-api/wallet/balance`
+GET `/northbound-api/wallet/balance`
 
 Retrieve details of a specific order.
 

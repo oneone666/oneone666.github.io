@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# Payment API
+# Southbound API
 
 Our Payment API facilitates efficient management of your payments.
 
@@ -18,7 +18,7 @@ To sign your API requests with a secret key, follow the instructions in the [Sig
 
 ### Login
 
-POST `/payment-api/login`
+POST `/southbound-api/login`
 
 Authenticate using UUID and password. Returns a token for subsequent requests.
 
@@ -94,7 +94,7 @@ Authenticate using UUID and password. Returns a token for subsequent requests.
 
 ### List Orders <Badge text="Requires authentication" type="warning"/>
 
-GET `/payment-api/transactions`
+GET `/southbound-api/transactions`
 
 Retrieve a list of all orders.
 
@@ -138,13 +138,13 @@ Retrieve a list of all orders.
       "description": "Ragnarok Origin",
       "item_code": "roo-item-246",
       "status": "created",
-      "paylink": "https://games.oneone.com/payment-api/orders/01HXBENQCRV4W42NE4WC98QTGY",
-      "verify_url": "https://games.oneone.com/payment-api/transactions/01HXBENQCRV4W42NE4WC98QTGY"
+      "paylink": "https://games.oneone.com/southbound-api/orders/01HXBENQCRV4W42NE4WC98QTGY",
+      "verify_url": "https://games.oneone.com/southbound-api/transactions/01HXBENQCRV4W42NE4WC98QTGY"
     }
   ],
   "links": {
-    "first": "https://games.oneone.com/payment-api/transactions?page=1",
-    "last": "https://games.oneone.com/payment-api/transactions?page=1",
+    "first": "https://games.oneone.com/southbound-api/transactions?page=1",
+    "last": "https://games.oneone.com/southbound-api/transactions?page=1",
     "prev": null,
     "next": null
   },
@@ -152,7 +152,7 @@ Retrieve a list of all orders.
     "current_page": 1,
     "from": 1,
     "last_page": 1,
-    "path": "https://games.oneone.com/payment-api/transactions",
+    "path": "https://games.oneone.com/southbound-api/transactions",
     "per_page": 20,
     "to": 1,
     "total": 1
@@ -179,7 +179,7 @@ Retrieve a list of all orders.
 
 ### Create Order <Badge text="Requires authentication" type="warning"/>
 
-POST `/payment-api/transactions`
+POST `/southbound-api/transactions`
 
 Create a new order.
 
@@ -260,8 +260,8 @@ Create a new order.
     "description": "Ragnarok Origin",
     "item_code": "roo-item-246",
     "status": "created",
-    "paylink": "https://games.oneone.com/payment-api/orders/01HXBENQCRV4W42NE4WC98QTGY",
-    "verify_url": "https://games.oneone.com/payment-api/transactions/01HXBENQCRV4W42NE4WC98QTGY"
+    "paylink": "https://games.oneone.com/southbound-api/orders/01HXBENQCRV4W42NE4WC98QTGY",
+    "verify_url": "https://games.oneone.com/southbound-api/transactions/01HXBENQCRV4W42NE4WC98QTGY"
   }
 }
 ```
@@ -300,7 +300,7 @@ Create a new order.
 
 ### Get Order <Badge text="Requires authentication" type="warning"/>
 
-GET `/payment-api/transactions/{order_id}`
+GET `/southbound-api/transactions/{order_id}`
 
 Retrieve details of a specific order.
 
@@ -349,8 +349,8 @@ Retrieve details of a specific order.
     "description": "Ragnarok Origin",
     "item_code": "roo-item-246",
     "status": "created",
-    "paylink": "https://games.oneone.com/payment-api/orders/01HXBENQCRV4W42NE4WC98QTGY",
-    "verify_url": "https://games.oneone.com/payment-api/transactions/01HXBENQCRV4W42NE4WC98QTGY"
+    "paylink": "https://games.oneone.com/southbound-api/orders/01HXBENQCRV4W42NE4WC98QTGY",
+    "verify_url": "https://games.oneone.com/southbound-api/transactions/01HXBENQCRV4W42NE4WC98QTGY"
   }
 }
 ```
@@ -401,8 +401,8 @@ After a successful payment, the transaction status will be updated to "paid". We
   "description": "Payment for game",
   "item_code": null,
   "status": "paid",
-  "paylink": "https://games.oneone.com/payment-api/orders/01HW4S5YXS7GARVFX3PEVRRDS4",
-  "verify_url": "https://games.oneone.com/payment-api/transactions/01HW4S5YXS7GARVFX3PEVRRDS4"
+  "paylink": "https://games.oneone.com/southbound-api/orders/01HW4S5YXS7GARVFX3PEVRRDS4",
+  "verify_url": "https://games.oneone.com/southbound-api/transactions/01HW4S5YXS7GARVFX3PEVRRDS4"
 }
 ```
 
@@ -443,7 +443,7 @@ Example object:
   "description": "Ragnarok Origin",
   "item_code": "roo-item-246",
   "status": "created",
-  "paylink": "https://games.oneone.com/payment-api/orders/01HXBGYT0GAGKV5QVTR1PQ4HJC",
-  "verify_url": "https://games.oneone.com/payment-api/transactions/01HXBGYT0GAGKV5QVTR1PQ4HJC"
+  "paylink": "https://games.oneone.com/southbound-api/orders/01HXBGYT0GAGKV5QVTR1PQ4HJC",
+  "verify_url": "https://games.oneone.com/southbound-api/transactions/01HXBGYT0GAGKV5QVTR1PQ4HJC"
 }
 ```

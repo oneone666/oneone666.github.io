@@ -58,8 +58,8 @@ export default defineConfig({
       {
         text: "Reference",
         items: [
-          { text: "Payment API", link: "/reference/payment-api" },
-          { text: "Reseller API", link: "/reference/reseller-api" },
+          { text: "Southbound API", link: "/reference/southbound-api" },
+          { text: "Northbound API", link: "/reference/northbound-api" },
         ],
       },
     ],
@@ -79,70 +79,70 @@ export default defineConfig({
         text: "Reference",
         items: [
           {
-            text: "Payment API",
-            link: "/reference/payment-api",
+            text: "Southbound API",
+            link: "/reference/southbound-api",
             items: [
               {
                 text: "Login",
-                link: "/reference/payment-api#login",
+                link: "/reference/southbound-api#login",
               },
               {
                 text: "List Orders",
-                link: "/reference/payment-api#list-orders",
+                link: "/reference/southbound-api#list-orders",
               },
               {
                 text: "Create Order",
-                link: "/reference/payment-api#create-order",
+                link: "/reference/southbound-api#create-order",
               },
               {
                 text: "Get Order",
-                link: "/reference/payment-api#get-order",
+                link: "/reference/southbound-api#get-order",
               },
             ],
           },
           {
-            text: "Reseller API",
-            link: "/reference/reseller-api",
+            text: "Northbound API",
+            link: "/reference/northbound-api",
             items: [
               {
                 text: "Login",
-                link: "/reference/reseller-api#login",
+                link: "/reference/northbound-api#login",
               },
               {
                 text: "List Games",
-                link: "/reference/reseller-api#list-games",
+                link: "/reference/northbound-api#list-games",
               },
               {
                 text: "Show Game Info",
-                link: "/reference/reseller-api#show-game-info",
+                link: "/reference/northbound-api#show-game-info",
               },
               {
                 text: "List Game Servers",
-                link: "/reference/reseller-api#list-game-servers",
+                link: "/reference/northbound-api#list-game-servers",
               },
               {
                 text: "List Game Items",
-                link: "/reference/reseller-api#list-game-items",
+                link: "/reference/northbound-api#list-game-items",
               },
               {
                 text: "List Game Characters",
-                link: "/reference/reseller-api#list-game-characters",
+                link: "/reference/northbound-api#list-game-characters",
               },
               {
                 text: "Create Order",
-                link: "/reference/reseller-api#create-order",
+                link: "/reference/northbound-api#create-order",
               },
               {
                 text: "Get Order",
-                link: "/reference/reseller-api#get-order",
+                link: "/reference/northbound-api#get-order",
               },
               {
                 text: "Confirm Order",
-                link: "/reference/reseller-api#confirm-order",
+                link: "/reference/northbound-api#confirm-order",
               },
               {
                 text: "Get Wallet Balance",
-                link: "/reference/reseller-api#get-wallet-balance",
+                link: "/reference/northbound-api#get-wallet-balance",
               }
             ],
           },
