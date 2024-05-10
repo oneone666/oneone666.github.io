@@ -49,15 +49,18 @@ export default defineConfig({
       {
         text: "Guide",
         items: [
-          { text: "Signing Request", link: "/guide/signature-algorithm.md" },
-          { text: "Authentication", link: "/guide/authentication.md" },
-          { text: "Rate Limiting", link: "/guide/rate-limiting.md" },
-          { text: "Error Codes", link: "/guide/errors.md" },
+          { text: "Signing Request", link: "/guide/signature-algorithm" },
+          { text: "Authentication", link: "/guide/authentication" },
+          { text: "Rate Limiting", link: "/guide/rate-limiting" },
+          { text: "Error Codes", link: "/guide/errors" },
         ],
       },
       {
         text: "Reference",
-        items: [{ text: "Payment API", link: "/reference/payment-api.md" }],
+        items: [
+          { text: "Payment API", link: "/reference/payment-api" },
+          { text: "Reseller API", link: "/reference/reseller-api" },
+        ],
       },
     ],
 
@@ -66,10 +69,10 @@ export default defineConfig({
       {
         text: "Guide",
         items: [
-          { text: "Signing Request", link: "/guide/signature-algorithm.md" },
-          { text: "Authentication", link: "/guide/authentication.md" },
-          { text: "Rate Limiting", link: "/guide/rate-limiting.md" },
-          { text: "Error Codes", link: "/guide/errors.md" },
+          { text: "Signing Request", link: "/guide/signature-algorithm" },
+          { text: "Authentication", link: "/guide/authentication" },
+          { text: "Rate Limiting", link: "/guide/rate-limiting" },
+          { text: "Error Codes", link: "/guide/errors" },
         ],
       },
       {
@@ -77,24 +80,70 @@ export default defineConfig({
         items: [
           {
             text: "Payment API",
-            link: "/reference/payment-api.md",
+            link: "/reference/payment-api",
             items: [
               {
                 text: "Login",
-                link: "/reference/payment-api.md#login",
+                link: "/reference/payment-api#login",
               },
               {
                 text: "List Orders",
-                link: "/reference/payment-api.md#list-orders",
+                link: "/reference/payment-api#list-orders",
               },
               {
                 text: "Create Order",
-                link: "/reference/payment-api.md#create-order",
+                link: "/reference/payment-api#create-order",
               },
               {
                 text: "Get Order",
-                link: "/reference/payment-api.md#get-order",
+                link: "/reference/payment-api#get-order",
               },
+            ],
+          },
+          {
+            text: "Reseller API",
+            link: "/reference/reseller-api",
+            items: [
+              {
+                text: "Login",
+                link: "/reference/reseller-api#login",
+              },
+              {
+                text: "List Games",
+                link: "/reference/reseller-api#list-games",
+              },
+              {
+                text: "Show Game Info",
+                link: "/reference/reseller-api#show-game-info",
+              },
+              {
+                text: "List Game Servers",
+                link: "/reference/reseller-api#list-game-servers",
+              },
+              {
+                text: "List Game Items",
+                link: "/reference/reseller-api#list-game-items",
+              },
+              {
+                text: "List Game Characters",
+                link: "/reference/reseller-api#list-game-characters",
+              },
+              {
+                text: "Create Order",
+                link: "/reference/reseller-api#create-order",
+              },
+              {
+                text: "Get Order",
+                link: "/reference/reseller-api#get-order",
+              },
+              {
+                text: "Confirm Order",
+                link: "/reference/reseller-api#confirm-order",
+              },
+              {
+                text: "Get Wallet Balance",
+                link: "/reference/reseller-api#get-wallet-balance",
+              }
             ],
           },
         ],
