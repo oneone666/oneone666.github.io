@@ -23,7 +23,3 @@ The `X-RateLimit-Limit` header specifies the maximum number of requests allowed 
 ## X-RateLimit-Remaining
 
 The `X-RateLimit-Remaining` header indicates the number of requests that can still be made before reaching the rate limit within the current time window. This value dynamically updates with each request, decreasing as requests are made, and resets when the time window elapses.
-
-#### Next Steps
-
-Explore the [Southbound API](/reference/southbound-api.md) to streamline your payment processes.

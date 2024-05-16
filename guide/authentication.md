@@ -45,7 +45,3 @@ Example response of an invalid token:
   "data": null
 }
 ```
-
-#### Next Steps
-
-Read more about [Rate Limiting](/guide/rate-limiting.md) to manage your API usage efficiently.

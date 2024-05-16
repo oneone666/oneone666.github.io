@@ -4,46 +4,46 @@ outline: deep
 
 # Northbound API
 
-Our Northbound API facilitates efficient management of your payments.
+Northbound API is designed to be used by merchants to create and manage orders.
 
 ::: tip
-All Payment API endpoints require authentication. Refer to the [Authentication](/guide/authentication.md) guide for details.
+All Northbound API endpoints require authentication. Refer to the [Authentication](/guide/authentication.md) guide for details.
 :::
 
 ::: tip
-To sign your API requests with a secret key, follow the instructions in the [Signature Algorithm](/guide/signature-algorithm.md) guide.
+To sign your API requests with a secret key, follow the instructions in the [Signing Requests](/guide/signing-requests.md) guide.
 :::
 
 ## Endpoints
 
 ### Login
 
-POST `/northbound-api/login`
+POST `/api/northbound/login`
 
-Authenticate using email and password. Returns a token for subsequent requests.
+Authenticate using UUID and password. Returns a token for subsequent requests.
 
 ::: details Body Parameters
 
 | Parameter | Type   | Required | Description |
 | --------- | ------ | -------- | ----------- |
-| email     | string | yes      | email       |
+| login     | string | yes      | UUID        |
 | password  | string | yes      | Password    |
 
 :::
 
 ```json
 {
-  "email": "user@example.net",
-  "password": "password"
+  "login": "3aa02408-a7fb-320a-8560-56b974f5daa0",
+  "password": "secret"
 }
 ```
 
 ::: details Response Fields
 
-| Field      | Type   | Description          |
-| ---------- | ------ | -------------------- |
-| token      | string | Authentication token |
-| secret_key | string | Secret key           |
+| Field | Type   | Description          |
+| ----- | ------ | -------------------- |
+| token | string | Authentication token |
+| error | string | Error message        |
 
 :::
 
@@ -55,8 +55,7 @@ Authenticate using email and password. Returns a token for subsequent requests.
   "code": 200,
   "error": null,
   "data": {
-    "token": "123|gBrXKfSrjZ1xbFCCwN4IIrMuVHf49J52BE5lBtRucfd78aaa",
-    "secret_key": "iYhlZH413fKLVdpLGD0uJwq1kIxI3cCl"
+    "token": "234|MUcPNPf2mS30sXbUSWBCnuVWEeNmgHb3oSCjiWzv0a46ede0"
   }
 }
 ```
@@ -66,7 +65,7 @@ Authenticate using email and password. Returns a token for subsequent requests.
   "status": "error",
   "code": 401,
   "error": {
-    "code": "INVALID_CREDENTIALS",
+    "code": "UNAUTHORIZED",
     "message": "Invalid credentials"
   },
   "data": null
@@ -78,11 +77,11 @@ Authenticate using email and password. Returns a token for subsequent requests.
   "status": "error",
   "code": 422,
   "error": {
-    "code": "VALIDATION_ERROR",
-    "message": "The email field is required. (and 1 more error)",
+    "code": "UNPROCESSABLE_CONTENT",
+    "message": "The login field is required. (and 1 more error)",
     "errors": {
-      "email": "The email field is required.",
-      "password": "The password field is required."
+      "login": ["The login field is required."],
+      "password": ["The password field is required."]
     }
   },
   "data": null
@@ -93,11 +92,11 @@ Authenticate using email and password. Returns a token for subsequent requests.
 
 <hr />
 
-### List Games <Badge text="Requires authentication" type="warning"/>
+### List Orders <Badge text="Requires authentication" type="warning"/>
 
-GET `/northbound-api/games`
+GET `/api/northbound/transactions`
 
-Retrieve a list of all available games.
+Retrieve a list of all orders.
 
 ::: details Headers
 
@@ -110,11 +109,11 @@ Retrieve a list of all available games.
 
 ::: details Response Fields
 
-| Field | Type  | Description                           |
-| ----- | ----- | ------------------------------------- |
-| data  | array | List of [`Game Object`](#game-object) |
-| links | array | Pagination links                      |
-| meta  | array | Pagination metadata                   |
+| Field | Type  | Description                                                      |
+| ----- | ----- | ---------------------------------------------------------------- |
+| data  | array | List of [`Order Transaction`](#order-transaction-object) objects |
+| links | array | Pagination links                                                 |
+| meta  | array | Pagination metadata                                              |
 
 :::
 
@@ -125,309 +124,39 @@ Retrieve a list of all available games.
   "status": "success",
   "code": 200,
   "error": null,
-  "data": {
-    "object": "game",
-    "game_id": "431ab52b-2b97-439f-b2f3-b24ad78899ae",
-    "slug": "ragnarok-origin-global",
-    "name": "Ragnarok Origin Global"
+  "data": [
+    {
+      "type": "payment_transaction",
+      "order_id": "01HXBENQCRV4W42NE4WC98QTGY",
+      "reference": "reference-1234",
+      "merchant_uuid": "9bfdea04-d4c8-4f44-aa58-ff622d1285bf",
+      "game_name": "ragnarok-origin-global",
+      "payment_channel": "qr_promptpay_thb",
+      "amount_cents": 1000,
+      "currency": "MYR",
+      "title": "Nyan Berry Pack (24,000)",
+      "description": "Ragnarok Origin",
+      "item_code": "roo-item-246",
+      "status": "created",
+      "paylink": "https://games.oneone.com/api/northbound/orders/01HXBENQCRV4W42NE4WC98QTGY",
+      "verify_url": "https://games.oneone.com/api/northbound/transactions/01HXBENQCRV4W42NE4WC98QTGY"
+    }
+  ],
+  "links": {
+    "first": "https://games.oneone.com/api/northbound/transactions?page=1",
+    "last": "https://games.oneone.com/api/northbound/transactions?page=1",
+    "prev": null,
+    "next": null
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 1,
+    "path": "https://games.oneone.com/api/northbound/transactions",
+    "per_page": 20,
+    "to": 1,
+    "total": 1
   }
-}
-```
-
-```json [500]
-{
-  "status": "error",
-  "code": 500,
-  "error": {
-    "code": "LIST_ERROR",
-    "message": "Failed to retrieve list of resources",
-    "tracking": "e61d7830-ec2f-4c7e-91fc-4cc3bef19865"
-  },
-  "data": null
-}
-```
-
-:::
-
-<hr />
-
-### Show Game Info <Badge text="Requires authentication" type="warning"/>
-
-GET `/northbound-api/games/{uuid}`
-
-Retrieve details of a specific order.
-
-::: details Headers
-
-| Header        | Type   | Required | Description  |
-| ------------- | ------ | -------- | ------------ |
-| Authorization | string | yes      | Bearer token |
-| X-Signature   | string | yes      | Signature    |
-
-:::
-
-::: details URL Parameters
-
-| Parameter | Type   | Required | Description |
-| --------- | ------ | -------- | ----------- |
-| uuid      | string | yes      | Game ID     |
-
-:::
-
-::: details Response Fields
-
-| Field | Type   | Description                   |
-| ----- | ------ | ----------------------------- |
-| data  | object | [`Game Object`](#game-object) |
-
-:::
-
-::: code-group
-
-```json [200]
-{
-  "status": "success",
-  "code": 200,
-  "error": null,
-  "data": {
-    "object": "game",
-    "game_id": "431ab52b-2b97-439f-b2f3-b24ad78899ae",
-    "slug": "ragnarok-origin-global",
-    "name": "Ragnarok Origin Global"
-  }
-}
-```
-
-```json [404]
-{
-  "status": "error",
-  "code": 404,
-  "error": {
-    "code": "RESOURCE_NOT_FOUND",
-    "message": "Resource not found"
-  },
-  "data": null
-}
-```
-
-```json [500]
-{
-  "status": "error",
-  "code": 500,
-  "error": {
-    "code": "SHOW_ERROR",
-    "message": "Failed to retrieve resource",
-    "tracking": "01cf630e-7f9c-49a3-badd-238ea7da7a72"
-  },
-  "data": null
-}
-```
-
-:::
-
-<hr />
-
-### List Game Servers <Badge text="Requires authentication" type="warning"/>
-
-GET `/northbound-api/games/{uuid}/servers`
-
-Retrieve a list of all available games.
-
-::: details Headers
-
-| Header        | Type   | Required | Description  |
-| ------------- | ------ | -------- | ------------ |
-| Authorization | string | yes      | Bearer token |
-| X-Signature   | string | yes      | Signature    |
-
-:::
-
-::: details Response Fields
-
-| Field | Type  | Description                           |
-| ----- | ----- | ------------------------------------- |
-| data  | array | List of [`Game Server`](#game-server) |
-| links | array | Pagination links                      |
-| meta  | array | Pagination metadata                   |
-
-:::
-
-::: code-group
-
-```json [200]
-{
-  "status": "success",
-  "code": 200,
-  "error": null,
-  "data": [
-    {
-      "object": "game_server",
-      "server_id": "246",
-      "server_name": "Prontera"
-    }
-  ]
-}
-```
-
-```json [404]
-{
-  "status": "error",
-  "code": 404,
-  "error": {
-    "code": "RESOURCE_NOT_FOUND",
-    "message": "Resource not found"
-  },
-  "data": null
-}
-```
-
-```json [500]
-{
-  "status": "error",
-  "code": 500,
-  "error": {
-    "code": "LIST_ERROR",
-    "message": "Failed to retrieve list of resources",
-    "tracking": "e61d7830-ec2f-4c7e-91fc-4cc3bef19865"
-  },
-  "data": null
-}
-```
-
-:::
-
-<hr />
-
-### List Game Items <Badge text="Requires authentication" type="warning"/>
-
-GET `/northbound-api/games/{uuid}/items`
-
-Retrieve a list of all available games.
-
-::: details Headers
-
-| Header        | Type   | Required | Description  |
-| ------------- | ------ | -------- | ------------ |
-| Authorization | string | yes      | Bearer token |
-| X-Signature   | string | yes      | Signature    |
-
-:::
-
-::: details Response Fields
-
-| Field | Type  | Description                       |
-| ----- | ----- | --------------------------------- |
-| data  | array | List of [`Game Item`](#game-item) |
-| links | array | Pagination links                  |
-| meta  | array | Pagination metadata               |
-
-:::
-
-::: code-group
-
-```json [200]
-{
-  "status": "success",
-  "code": 200,
-  "error": null,
-  "data": [
-    {
-      "object": "game_item",
-      "game_item_id": 1,
-      "name": "Nyan Berry * 40",
-      "channels": [
-        {
-          "channel_name": "OOC",
-          "channel_slug": "ooc",
-          "currency": "OOC",
-          "base_price": "5.00"
-        }
-      ]
-    }
-  ]
-}
-```
-
-```json [404]
-{
-  "status": "error",
-  "code": 404,
-  "error": {
-    "code": "RESOURCE_NOT_FOUND",
-    "message": "Resource not found"
-  },
-  "data": null
-}
-```
-
-```json [500]
-{
-  "status": "error",
-  "code": 500,
-  "error": {
-    "code": "LIST_ERROR",
-    "message": "Failed to retrieve list of resources",
-    "tracking": "e61d7830-ec2f-4c7e-91fc-4cc3bef19865"
-  },
-  "data": null
-}
-```
-
-:::
-
-<hr />
-
-### List Game Characters <Badge text="Requires authentication" type="warning"/>
-
-GET `/northbound-api/games/{uuid}/characters`
-
-Retrieve a list of game characters.
-
-::: details Headers
-
-| Header        | Type   | Required | Description  |
-| ------------- | ------ | -------- | ------------ |
-| Authorization | string | yes      | Bearer token |
-| X-Signature   | string | yes      | Signature    |
-
-:::
-
-::: details Response Fields
-
-| Field | Type  | Description                                 |
-| ----- | ----- | ------------------------------------------- |
-| data  | array | List of [`Game Character`](#game-character) |
-| links | array | Pagination links                            |
-| meta  | array | Pagination metadata                         |
-
-:::
-
-::: code-group
-
-```json [200]
-{
-  "status": "success",
-  "code": 200,
-  "error": null,
-  "data": [
-    {
-      "object": "game_character",
-      "game_character_id": "111",
-      "name": "tester"
-    }
-  ]
-}
-```
-
-```json [404]
-{
-  "status": "error",
-  "code": 404,
-  "error": {
-    "code": "RESOURCE_NOT_FOUND",
-    "message": "Resource not found"
-  },
-  "data": null
 }
 ```
 
@@ -450,7 +179,7 @@ Retrieve a list of game characters.
 
 ### Create Order <Badge text="Requires authentication" type="warning"/>
 
-POST `/northbound-api/orders`
+POST `/api/northbound/transactions`
 
 Create a new order.
 
@@ -465,33 +194,49 @@ Create a new order.
 
 ::: details Body Parameters
 
-| Parameter    | Type   | Required | Description       |
-| ------------ | ------ | -------- | ----------------- |
-| game_id      | string | yes      | Game UUID         |
-| server_id    | string | yes      | Game server ID    |
-| user_id      | string | yes      | Game account ID   |
-| character_id | string | yes      | Game character ID |
-| item_id      | string | yes      | Game item ID      |
-| voucher      | string | no       | Voucher code      |
+| Parameter               | Type   | Required | Description                       |
+| ----------------------- | ------ | -------- | --------------------------------- |
+| merchant_transaction_id | string | yes      | Unique reference                  |
+| merchant_uuid           | string | yes      | Merchant UUID                     |
+| game_name               | string | yes      | Game name                         |
+| account_info            | array  | no       | Game account info                 |
+| country                 | string | yes      | Country code in iso_3166_2 format |
+| payment_channel         | string | yes      | Payment channel                   |
+| amount_cents            | int    | yes      | Amount in cents                   |
+| currency                | string | yes      | Currency                          |
+| title                   | string | yes      | Title                             |
+| description             | string | no       | Description                       |
+| item_code               | string | no       | Item code                         |
+| merchant_return_url     | string | yes      | Merchant return URL               |
 
 :::
 
 ```json
 {
-  "game_id": "6a216c80-67fc-4311-9fa4-1907c77902bc",
-  "server_id": "123",
-  "user_id": "BCD123456",
-  "character_id": "3579--JohnDoe",
-  "item_id": 12,
-  "voucher": "VOUCHER456"
+  "merchant_transaction_id": "some-transaction-string",
+  "merchant_uuid": "9bfdea04-d4c8-4f44-aa58-ff622d1285bf",
+  "game_name": "ragnarok-origin-global",
+  "account_info": {
+    "serverName": "Prontera",
+    "loginId": "FGHJK1234",
+    "name": "Kuro"
+  },
+  "payment_channel": "qr_promptpay_thb",
+  "country": "MY",
+  "amount_cents": "1000",
+  "currency": "MYR",
+  "title": "Nyan Berry Pack (24,000)",
+  "description": "Ragnarok Origin",
+  "item_code": "roo-item-246",
+  "merchant_return_url": "https://example.com"
 }
 ```
 
 ::: details Response Fields
 
-| Field | Type   | Description                     |
-| ----- | ------ | ------------------------------- |
-| data  | object | [`Order Object`](#order-object) |
+| Field | Type   | Description                                             |
+| ----- | ------ | ------------------------------------------------------- |
+| data  | object | [`Order Transaction`](#order-transaction-object) object |
 
 :::
 
@@ -503,18 +248,20 @@ Create a new order.
   "code": 201,
   "error": null,
   "data": {
-    "order_id": "01HXGV4DH7J1RC0G7PN3VKCYFX",
-    "game": "Ragnarok Origin Global",
-    "character_id": "TDAF95XM",
-    "character_name": "James",
-    "item": "Nyan Berry * 40",
-    "status": "new",
-    "total_price": "OOC 4.6",
-    "transaction": {
-      "transaction_id": "01HXGV4DHAVAEFX10WQJXWX65D",
-      "amount": "OOC 500",
-      "status": "new"
-    }
+    "type": "payment_transaction",
+    "order_id": "01HXBENQCRV3W42NE4WC38QTGY",
+    "reference": null,
+    "merchant_uuid": "9bfdea14-d4c8-4f34-aa58-ff621d1285bf",
+    "game_name": "ragnarok-origin-global",
+    "payment_channel": "qr_promptpay_thb",
+    "amount_cents": 1000,
+    "currency": "MYR",
+    "title": "Nyan Berry Pack (24,000)",
+    "description": "Ragnarok Origin",
+    "item_code": "roo-item-246",
+    "status": "created",
+    "paylink": "https://games.oneone.com/api/northbound/orders/01HXBENQCRV4W42NE4WC98QTGY",
+    "verify_url": "https://games.oneone.com/api/northbound/transactions/01HXBENQCRV4W42NE4WC98QTGY"
   }
 }
 ```
@@ -525,9 +272,9 @@ Create a new order.
   "code": 422,
   "error": {
     "code": "VALIDATION_ERROR",
-    "message": "The game id field must be a valid UUID.",
+    "message": "The selected payment channel is invalid.",
     "errors": {
-      "game_id": "The game id field must be a valid UUID."
+      "payment_channel": "The selected payment channel is invalid."
     }
   },
   "data": null
@@ -537,10 +284,11 @@ Create a new order.
 ```json [500]
 {
   "status": "error",
-  "code": 400,
+  "code": 500,
   "error": {
-    "code": "PAYMENT_ERROR",
-    "message": "Payment error"
+    "code": "CREATE_ERROR",
+    "message": "Failed to create resource",
+    "tracking": "50e10f6c-3524-411d-a73f-bdbde4b37f10"
   },
   "data": null
 }
@@ -552,7 +300,7 @@ Create a new order.
 
 ### Get Order <Badge text="Requires authentication" type="warning"/>
 
-GET `/northbound-api/orders/{order_id}`
+GET `/api/northbound/transactions/{order_id}`
 
 Retrieve details of a specific order.
 
@@ -575,9 +323,9 @@ Retrieve details of a specific order.
 
 ::: details Response Fields
 
-| Field | Type   | Description                     |
-| ----- | ------ | ------------------------------- |
-| order | object | [`Order Object`](#order-object) |
+| Field | Type   | Description                                             |
+| ----- | ------ | ------------------------------------------------------- |
+| order | object | [`Order Transaction`](#order-transaction-object) object |
 
 :::
 
@@ -589,18 +337,20 @@ Retrieve details of a specific order.
   "code": 200,
   "error": null,
   "data": {
-    "order_id": "01HXGW60DRASC3EBSP8BE4T42Y",
-    "game": "Ragnarok Origin Global",
-    "character_id": "TDAF95XM",
-    "character_name": "James",
-    "item": "Nyan Berry * 40",
-    "status": "new",
-    "total_price": "OOC 4.6",
-    "transaction": {
-      "transaction_id": "01HXGW60DV97K33QDG44BF8KWM",
-      "amount": "OOC 500",
-      "status": "new"
-    }
+    "type": "payment_transaction",
+    "order_id": "01HXBENQCRV4W42NE4WC98QTGY",
+    "reference": null,
+    "merchant_uuid": "9bfdea04-d4c8-4f44-aa58-ff622d1285bf",
+    "game_name": "ragnarok-origin-global",
+    "payment_channel": "qr_promptpay_thb",
+    "amount_cents": 1000,
+    "currency": "MYR",
+    "title": "Nyan Berry Pack (24,000)",
+    "description": "Ragnarok Origin",
+    "item_code": "roo-item-246",
+    "status": "created",
+    "paylink": "https://games.oneone.com/api/northbound/orders/01HXBENQCRV4W42NE4WC98QTGY",
+    "verify_url": "https://games.oneone.com/api/northbound/transactions/01HXBENQCRV4W42NE4WC98QTGY"
   }
 }
 ```
@@ -632,314 +382,68 @@ Retrieve details of a specific order.
 
 :::
 
-<hr />
+## Callbacks
 
-### Confirm Order <Badge text="Requires authentication" type="warning"/>
+### Payment Success Callback
 
-POST `/northbound-api/orders/{transaction_id}`
+After a successful payment, the transaction status will be updated to "paid". We will send a POST request to your callback URL with the [`Order Transaction`](#order-transaction-object) object as payload in JSON format:
 
-Retrieve details of a specific order.
-
-::: details Headers
-
-| Header        | Type   | Required | Description  |
-| ------------- | ------ | -------- | ------------ |
-| Authorization | string | yes      | Bearer token |
-| X-Signature   | string | yes      | Signature    |
-
-:::
-
-::: details URL Parameters
-
-| Parameter      | Type   | Required | Description    |
-| -------------- | ------ | -------- | -------------- |
-| transaction_id | string | yes      | Transaction ID |
-
-:::
-
-::: details Response Fields
-
-| Field | Type   | Description                     |
-| ----- | ------ | ------------------------------- |
-| order | object | [`Order Object`](#order-object) |
-
-:::
-
-::: code-group
-
-```json [200]
+```json
 {
-  "status": "success",
-  "code": 200,
-  "error": null,
-  "data": {
-    "order_id": "01HXGW60DRASC3EBSP8BE4T42Y",
-    "game": "Ragnarok Origin Global",
-    "character_id": "TDAF95XM",
-    "character_name": "James",
-    "item": "Nyan Berry * 40",
-    "status": "pending",
-    "total_price": "OOC 4.6",
-    "transaction": {
-      "transaction_id": "01HXGW60DV97K33QDG44BF8KWM",
-      "amount": "OOC 500",
-      "status": "paid",
-      "paid_at": "2024-05-10 17:53:04"
-    }
-  }
+  "order_id": "01HW4S5YXS7GARVFX3PEVRRDS4",
+  "reference": "569c420e-5739-3eb5-b52a-9a51ce38f0ba",
+  "merchant_uuid": "25f0a63d-568f-3101-8181-86a595396e5d",
+  "game_name": "ragnarok-origin-global",
+  "payment_channel": "for_testing",
+  "amount_cents": 1000,
+  "currency": "MYR",
+  "title": "Payment for game",
+  "description": "Payment for game",
+  "item_code": null,
+  "status": "paid",
+  "paylink": "https://games.oneone.com/api/northbound/orders/01HW4S5YXS7GARVFX3PEVRRDS4",
+  "verify_url": "https://games.oneone.com/api/northbound/transactions/01HW4S5YXS7GARVFX3PEVRRDS4"
 }
 ```
 
-```json [404]
-{
-  "status": "error",
-  "code": 404,
-  "error": {
-    "code": "RESOURCE_NOT_FOUND",
-    "message": "Resource not found"
-  },
-  "data": null
-}
-```
+Ensure that your callback URL returns a 200 status code upon successful processing. We will retry the callback up to 3 times if it fails.
 
-```json [500]
-{
-  "status": "error",
-  "code": 500,
-  "error": {
-    "code": "PAYMENT_ERROR",
-    "message": "Payment error",
-    "tracking": "ae24e2a6-47ea-49b5-abd4-c83ca91aab03"
-  },
-  "data": null
-}
-```
+## Order Transaction Object
 
-<hr />
-
-### Get Wallet Balance <Badge text="Requires authentication" type="warning"/>
-
-GET `/northbound-api/wallet/balance`
-
-Retrieve details of a specific order.
-
-::: details Headers
-
-| Header        | Type   | Required | Description  |
-| ------------- | ------ | -------- | ------------ |
-| Authorization | string | yes      | Bearer token |
-| X-Signature   | string | yes      | Signature    |
-
-:::
-
-::: details Response Fields
-
-| Field | Type   | Description                         |
-| ----- | ------ | ----------------------------------- |
-| order | object | [`Wallet Balance`](#wallet-balance) |
-
-:::
-
-::: code-group
-
-```json [200]
-{
-  "status": "success",
-  "code": 200,
-  "error": null,
-  "data": {
-    "object": "wallet_balance",
-    "currency": "OOC",
-    "value_cents": 4500
-  }
-}
-```
-
-```json [404]
-{
-  "status": "error",
-  "code": 404,
-  "error": {
-    "code": "RESOURCE_NOT_FOUND",
-    "message": "Resource not found"
-  },
-  "data": null
-}
-```
-
-```json [500]
-{
-  "status": "error",
-  "code": 500,
-  "error": {
-    "code": "SHOW_ERROR",
-    "message": "Failed to retrieve resource",
-    "tracking": "01cf630e-7f9c-49a3-badd-238ea7da7a72"
-  },
-  "data": null
-}
-```
-
-:::
-
-## Response Objects
-
-### Game Object
-
-| Field   | Type   | Description |
-| ------- | ------ | ----------- |
-| object  | string | Object type |
-| game_id | string | Order ID    |
-| slug    | string | Game slug   |
-| name    | string | Game name   |
+| Field           | Type   | Description      |
+| --------------- | ------ | ---------------- |
+| object          | string | Object type      |
+| order_id        | string | Order ID         |
+| reference       | string | Unique reference |
+| merchant_uuid   | string | Merchant UUID    |
+| game_name       | string | Game name        |
+| payment_channel | string | Payment channel  |
+| amount_cents    | int    | Amount in cents  |
+| currency        | string | Currency         |
+| title           | string | Title            |
+| description     | string | Description      |
+| item_code       | string | Item code        |
+| status          | string | Order status     |
+| paylink         | string | Payment link     |
+| verify_url      | string | Verification URL |
 
 Example object:
 
 ```json
 {
-  "object": "game",
-  "game_id": "4319f52b-1b97-439f-b2f3-b24ad70099ae",
-  "slug": "ragnarok-origin-global",
-  "name": "Ragnarok Origin Global"
+  "type": "payment_transaction",
+  "order_id": "01HXBGYT0GAGKV5QVTR1PQ4HJC",
+  "reference": null,
+  "merchant_uuid": "9bfdea04-d4c8-4f44-aa58-ff622d1285bf",
+  "game_name": "ragnarok-origin-global",
+  "payment_channel": "qr_promptpay_thb",
+  "amount_cents": 1000,
+  "currency": "MYR",
+  "title": "Nyan Berry Pack (24,000)",
+  "description": "Ragnarok Origin",
+  "item_code": "roo-item-246",
+  "status": "created",
+  "paylink": "https://games.oneone.com/api/northbound/orders/01HXBGYT0GAGKV5QVTR1PQ4HJC",
+  "verify_url": "https://games.oneone.com/api/northbound/transactions/01HXBGYT0GAGKV5QVTR1PQ4HJC"
 }
 ```
-
-### Game Server
-
-| Field       | Type   | Description |
-| ----------- | ------ | ----------- |
-| object      | string | Object type |
-| server_id   | string | Server ID   |
-| server_name | string | Server name |
-
-Example object:
-
-```json
-{
-  "object": "game_server",
-  "server_id": "246",
-  "server_name": "Prontera"
-}
-```
-
-### Game Item
-
-| Field        | Type   | Description                                               |
-| ------------ | ------ | --------------------------------------------------------- |
-| object       | string | Object type                                               |
-| game_item_id | string | Item ID                                                   |
-| name         | string | Item name                                                 |
-| channels     | array  | List of [`Game Item Channel`](#game-item-channel) objects |
-
-Example object:
-
-```json
-{
-  "object": "game_item",
-  "game_item_id": 1,
-  "name": "Nyan Berry * 40",
-  "channels": [
-    {
-      "channel_name": "OOC",
-      "channel_slug": "ooc",
-      "currency": "OOC",
-      "base_price": "5.00"
-    }
-  ]
-}
-```
-
-### Game Item Channel
-
-| Field        | Type   | Description  |
-| ------------ | ------ | ------------ |
-| channel_name | string | Channel name |
-| channel_slug | string | Channel slug |
-| currency     | string | Currency     |
-| base_price   | string | Base price   |
-
-Example object:
-
-```json
-{
-  "channel_name": "OOC",
-  "channel_slug": "ooc",
-  "currency": "OOC",
-  "base_price": "5.00"
-}
-```
-
-### Game Character
-
-| Field             | Type   | Description    |
-| ----------------- | ------ | -------------- |
-| object            | string | Object type    |
-| game_character_id | string | Character ID   |
-| name              | string | Character name |
-
-Example object:
-
-```json
-{
-  "object": "game_character",
-  "game_character_id": "2468",
-  "name": "John Doe"
-}
-```
-
-### Order Object
-
-| Field          | Type   | Description         |
-| -------------- | ------ | ------------------- |
-| order_id       | string | Order ID            |
-| game           | string | Game name           |
-| character_id   | string | Game character ID   |
-| character_name | string | Game character name |
-| item           | string | Item name           |
-| status         | string | Order status        |
-| total_price    | string | Total price         |
-| transaction    | object | Transaction object  |
-
-```json
-{
-  "order_id": "01HXGW60DRASC3EBSP8BE4T42Y",
-  "game": "Ragnarok Origin Global",
-  "character_id": "TDAF95XM",
-  "character_name": "James",
-  "item": "Nyan Berry * 40",
-  "status": "new",
-  "total_price": "OOC 4.6",
-  "transaction": {
-    "transaction_id": "01HXGW60DV97K33QDG44BF8KWM",
-    "amount": "OOC 500",
-    "status": "new"
-  }
-}
-```
-
-### Transaction Object
-
-| Field          | Type   | Description        |
-| -------------- | ------ | ------------------ |
-| transaction_id | string | Transaction ID     |
-| amount         | string | Transaction amount |
-| status         | string | Transaction status |
-| paid_at        | string | Payment date       |
-
-Example object:
-
-```json
-{
-  "transaction_id": "01HXGW60DV97K33QDG44BF8KWM",
-  "amount": "OOC 500",
-  "status": "new"
-}
-```
-
-### Wallet Balance
-
-| Field       | Type    | Description |
-| ----------- | ------- | ----------- |
-| object      | string  | Object type |
-| currency    | string  | Currency    |
-| value_cents | integer | Balance     |

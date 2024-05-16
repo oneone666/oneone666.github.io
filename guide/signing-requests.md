@@ -1,9 +1,17 @@
-# Signature Algorithm
+# Signing API Requests
 
-The signature algorithm adds an extra layer of security by signing your API requests with a secret key. This guide explains how to sign your requests and send them to the server.
+The signed request adds an extra layer of security by signing your API requests with a secret key. This guide explains how to sign your requests and send them to the server.
 
 ::: tip
 Your secret key, unique to your account, serves as your signature key and must be kept confidential.
+:::
+
+## Signature Algorithm
+
+The signature algorithm uses the HMAC SHA256 hashing algorithm to sign your API requests. The signature ensures the integrity and authenticity of your requests.
+
+::: warning
+To ensure the security of your API credentials, it's recommended that API signatures are not generated on the frontend, as this could lead to potential exposure of sensitive information.
 :::
 
 ## How It Works
@@ -43,7 +51,7 @@ Sort the payload's JSON keys alphabetically and compact it:
 Construct the data string by concatenating the HTTP method, URL, and JSON-encoded payload in this format:
 
 ```plaintext
-<method>\n<url>\n<payload>
+<HTTP-Method>\n<HTTP-URI>\n<payload>
 ```
 
 For example, when sending a POST request to https://games.oneone.com/demo-api/orders with the provided payload, the data string should be:
@@ -67,7 +75,7 @@ The hashed value from the example should be `d46691367c13a98fe93e9cb2d4de6010792
 If your request does not contain a payload, construct the data string by concatenating the HTTP method and URL in this format:
 
 ```plaintext
-<method>\n<url>
+<HTTP-Method>\n<HTTP-URI>
 ```
 
 For instance, when sending a GET request to https://games.oneone.com/demo-api/orders, the data string should be:
@@ -85,7 +93,7 @@ hash_hmac('sha256', $data, 'secret_value');
 
 The hashed value from the example should be `c6056f6fbd2ba8016373619de793b37eb4f45c975af49b2919e3809a7ffe816f`.
 
-### X-Signature Header
+## X-Signature Header
 
 Once you have the hashed value, include it in the `X-Signature` header for every API request. For example:
 
@@ -134,7 +142,3 @@ Example response of an invalid signature:
   "data": null
 }
 ```
-
-#### Next Steps
-
-Learn to [authenticate](/guide/authentication.md) your requests.

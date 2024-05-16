@@ -49,7 +49,7 @@ export default defineConfig({
       {
         text: "Guide",
         items: [
-          { text: "Signing Request", link: "/guide/signature-algorithm" },
+          { text: "Signing Request", link: "/guide/signing-requests" },
           { text: "Authentication", link: "/guide/authentication" },
           { text: "Rate Limiting", link: "/guide/rate-limiting" },
           { text: "Error Codes", link: "/guide/errors" },
@@ -58,8 +58,8 @@ export default defineConfig({
       {
         text: "Reference",
         items: [
-          { text: "Southbound API", link: "/reference/southbound-api" },
           { text: "Northbound API", link: "/reference/northbound-api" },
+          { text: "Southbound API", link: "/reference/southbound-api" },
         ],
       },
     ],
@@ -69,7 +69,7 @@ export default defineConfig({
       {
         text: "Guide",
         items: [
-          { text: "Signing Request", link: "/guide/signature-algorithm" },
+          { text: "Signing Request", link: "/guide/signing-requests" },
           { text: "Authentication", link: "/guide/authentication" },
           { text: "Rate Limiting", link: "/guide/rate-limiting" },
           { text: "Error Codes", link: "/guide/errors" },
@@ -79,54 +79,16 @@ export default defineConfig({
         text: "Reference",
         items: [
           {
-            text: "Southbound API",
-            link: "/reference/southbound-api",
-            items: [
-              {
-                text: "Login",
-                link: "/reference/southbound-api#login",
-              },
-              {
-                text: "List Orders",
-                link: "/reference/southbound-api#list-orders",
-              },
-              {
-                text: "Create Order",
-                link: "/reference/southbound-api#create-order",
-              },
-              {
-                text: "Get Order",
-                link: "/reference/southbound-api#get-order",
-              },
-            ],
-          },
-          {
             text: "Northbound API",
             link: "/reference/northbound-api",
             items: [
               {
-                text: "Login",
+                text: "Merchant Login",
                 link: "/reference/northbound-api#login",
               },
               {
-                text: "List Games",
-                link: "/reference/northbound-api#list-games",
-              },
-              {
-                text: "Show Game Info",
-                link: "/reference/northbound-api#show-game-info",
-              },
-              {
-                text: "List Game Servers",
-                link: "/reference/northbound-api#list-game-servers",
-              },
-              {
-                text: "List Game Items",
-                link: "/reference/northbound-api#list-game-items",
-              },
-              {
-                text: "List Game Characters",
-                link: "/reference/northbound-api#list-game-characters",
+                text: "List Orders",
+                link: "/reference/northbound-api#list-orders",
               },
               {
                 text: "Create Order",
@@ -136,13 +98,51 @@ export default defineConfig({
                 text: "Get Order",
                 link: "/reference/northbound-api#get-order",
               },
+            ],
+          },
+          {
+            text: "Southbound API",
+            link: "/reference/southbound-api",
+            items: [
+              {
+                text: "Login",
+                link: "/reference/southbound-api#login",
+              },
+              {
+                text: "List Games",
+                link: "/reference/southbound-api#list-games",
+              },
+              {
+                text: "Show Game Info",
+                link: "/reference/southbound-api#show-game-info",
+              },
+              {
+                text: "List Game Servers",
+                link: "/reference/southbound-api#list-game-servers",
+              },
+              {
+                text: "List Game Items",
+                link: "/reference/southbound-api#list-game-items",
+              },
+              {
+                text: "List Game Characters",
+                link: "/reference/southbound-api#list-game-characters",
+              },
+              {
+                text: "Create Order",
+                link: "/reference/southbound-api#create-order",
+              },
+              {
+                text: "Get Order",
+                link: "/reference/southbound-api#get-order",
+              },
               {
                 text: "Confirm Order",
-                link: "/reference/northbound-api#confirm-order",
+                link: "/reference/southbound-api#confirm-order",
               },
               {
                 text: "Get Wallet Balance",
-                link: "/reference/northbound-api#get-wallet-balance",
+                link: "/reference/southbound-api#get-wallet-balance",
               }
             ],
           },
