@@ -25,10 +25,10 @@ Have you noticed an issue with our API? Please [email us][email]. We're here to 
 
 ## Environments
 
-| Environment | URL                      |
-| ----------- | ------------------------ |
-| Production  | https://games.oneone.com |
-| Sandbox     | N/A                      |
+| Environment | URL                        |
+| ----------- | -------------------------- |
+| Production  | https://games.oneone.com   |
+| Sandbox     | https://staging.oneone.com |
 
 ## Request Data Format
 
