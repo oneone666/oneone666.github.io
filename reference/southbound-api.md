@@ -4,7 +4,7 @@ outline: deep
 
 # Southbound API
 
-Our Southbound API allows you to automate the purchase of in-game items as equavalent to the UI at [https://games.oneone.com](https://games.oneone.com).
+Our Southbound API allows you to automate the purchase of in-game items.
 
 ::: tip
 All Southbound API endpoints require authentication. Refer to the [Authentication](/guide/authentication.md) guide for details.
