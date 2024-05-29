@@ -244,6 +244,14 @@ Retrieve a list of all available games.
 
 :::
 
+::: details URL Parameters
+
+| Parameter | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| uuid      | string | yes      | Game ID     |
+
+:::
+
 ::: details Response Fields
 
 | Field | Type  | Description                           |
@@ -312,6 +320,14 @@ Retrieve a list of all available games.
 | ------------- | ------ | -------- | ------------ |
 | Authorization | string | yes      | Bearer token |
 | X-Signature   | string | yes      | Signature    |
+
+:::
+
+::: details URL Parameters
+
+| Parameter | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| uuid      | string | yes      | Game ID     |
 
 :::
 
@@ -395,6 +411,14 @@ Retrieve a list of game characters.
 :::
 
 ::: details URL Parameters
+
+| Parameter | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| uuid      | string | yes      | Game ID     |
+
+:::
+
+::: details Query Parameters
 
 | Parameter  | Type   | Required | Description     |
 | ---------- | ------ | -------- | --------------- |
