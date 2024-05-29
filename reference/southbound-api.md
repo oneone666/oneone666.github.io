@@ -394,21 +394,18 @@ Retrieve a list of game characters.
 
 :::
 
-::: details Body Parameters
+::: details URL Parameters
 
 | Parameter  | Type   | Required | Description     |
 | ---------- | ------ | -------- | --------------- |
 | account_id | string | yes      | Game account ID |
 | server_id  | string | yes      | Game server ID  |
 
-:::
-
-```json
-{
-  "account_id": "BCD123456",
-  "server_id": "123"
-}
 ```
+Example: /api/southbound/games/{uuid}/characters?account_id=BCD123456&server_id=123
+```
+
+:::
 
 ::: details Response Fields
 
