@@ -394,6 +394,22 @@ Retrieve a list of game characters.
 
 :::
 
+::: details Body Parameters
+
+| Parameter  | Type   | Required | Description     |
+| ---------- | ------ | -------- | --------------- |
+| account_id | string | yes      | Game account ID |
+| server_id  | string | yes      | Game server ID  |
+
+:::
+
+```json
+{
+  "account_id": "BCD123456",
+  "server_id": "123"
+}
+```
+
 ::: details Response Fields
 
 | Field | Type  | Description                                 |
@@ -467,14 +483,15 @@ Create a new order.
 
 ::: details Body Parameters
 
-| Parameter    | Type   | Required | Description       |
-| ------------ | ------ | -------- | ----------------- |
-| game_id      | string | yes      | Game UUID         |
-| server_id    | string | yes      | Game server ID    |
-| user_id      | string | yes      | Game account ID   |
-| character_id | string | yes      | Game character ID |
-| item_id      | string | yes      | Game item ID      |
-| voucher      | string | no       | Voucher code      |
+| Parameter      | Type   | Required | Description         |
+| -------------- | ------ | -------- | ------------------- |
+| game_id        | string | yes      | Game UUID           |
+| server_id      | string | yes      | Game server ID      |
+| user_id        | string | yes      | Game account ID     |
+| character_id   | string | yes      | Game character ID   |
+| character_name | string | yes      | Game character name |
+| item_id        | string | yes      | Game item ID        |
+| voucher        | string | no       | Voucher code        |
 
 :::
 
@@ -483,7 +500,8 @@ Create a new order.
   "game_id": "6a216c80-67fc-4311-9fa4-1907c77902bc",
   "server_id": "123",
   "user_id": "BCD123456",
-  "character_id": "3579--JohnDoe",
+  "character_id": "13579",
+  "character_name": "John Doe",
   "item_id": 12,
   "voucher": "VOUCHER456"
 }
@@ -508,7 +526,7 @@ Create a new order.
     "type": "order",
     "id": "01HXRPFZH66P5M21ET3PMJ9T62",
     "game": "Ragnarok Origin Global",
-    "character_id": "TDAF95XM",
+    "character_id": "13579",
     "character_name": "John Doe",
     "item": "Nyan Berry * 40",
     "status": "new",
