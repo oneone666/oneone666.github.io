@@ -681,9 +681,9 @@ Retrieve details of a specific order.
 
 ### Confirm Order <Badge text="Requires authentication" type="warning"/>
 
-POST `/api/southbound/orders/{transaction_id}`
+POST `/api/southbound/transactions/{transaction_id}`
 
-Retrieve details of a specific order.
+Confirm an order via transaction ID.
 
 ::: details Headers
 
