@@ -208,6 +208,7 @@ Create a new order.
 | description             | string | no       | Description                       |
 | item_code               | string | no       | Item code                         |
 | merchant_return_url     | string | yes      | Merchant return URL               |
+| webhook_url             | string | no       | Webhook URL for callback          |
 
 :::
 
@@ -228,7 +229,8 @@ Create a new order.
   "title": "Nyan Berry Pack (24,000)",
   "description": "Ragnarok Origin",
   "item_code": "roo-item-246",
-  "merchant_return_url": "https://example.com"
+  "merchant_return_url": "https://example.com",
+  "webhook_url": "https://example.com/webhook"
 }
 ```
 
