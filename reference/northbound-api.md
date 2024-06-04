@@ -217,7 +217,7 @@ Create a new order.
 
 ```json
 {
-  "merchant_transaction_id": "some-transaction-string",
+  "merchant_transaction_id": "some-unique-string",
   "merchant_uuid": "9bfdea04-d4c8-4f44-aa58-ff622d1285bf",
   "game_name": "ragnarok-origin-global",
   "account_info": {
