@@ -954,7 +954,7 @@ Example object:
   "type": "order",
   "id": "01HXGW60DRASC3EBSP8BE4T42Y",
   "game": "Ragnarok Origin Global",
-  "character_id": "TDAF95XM",
+  "character_id": "2468",
   "character_name": "Joh",
   "item": "Nyan Berry * 40",
   "status": "new",
@@ -974,6 +974,7 @@ Example object:
 | ------- | ------ | ------------------ |
 | type    | string | Object type        |
 | id      | string | Transaction ID     |
+| currency  | string | Transaction currency |
 | amount  | string | Transaction amount |
 | status  | string | Transaction status |
 | paid_at | string | Payment date       |
@@ -984,7 +985,8 @@ Example object:
 {
   "type": "transaction",
   "id": "01HXGW60DV97K33QDG44BF8KWM",
-  "amount": "OOC 500",
+  "currency": "OOC",
+  "amount": "5.00"
   "status": "new"
 }
 ```
