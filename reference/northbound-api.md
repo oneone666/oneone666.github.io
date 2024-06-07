@@ -200,8 +200,8 @@ Create a new order.
 | merchant_uuid           | string | yes      | Merchant UUID                     |
 | game_name               | string | yes      | Game name                         |
 | account_info            | array  | yes      | Game account info                 |
-| account_info.serverName | string | yes      | Game character server name        |
-| account_info.loginId    | string | yes      | Game character login ID           |
+| account_info.serverName | string | no      | Game character server name        |
+| account_info.loginId    | string | no      | Game character login ID           |
 | account_info.name       | string | yes      | Game character name               |
 | country                 | string | yes      | Country code in iso_3166_2 format |
 | payment_channel         | string | yes      | Payment channel                   |
