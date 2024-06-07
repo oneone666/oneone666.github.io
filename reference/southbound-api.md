@@ -555,7 +555,8 @@ Create a new order.
     "transaction": {
       "type": "transaction",
       "id": "01HXRPFZH8XNETP75TYBC1M42J",
-      "amount": "OOC 500",
+      "currency":"OOC",
+      "amount": "4.60",
       "status": "new"
     }
   }
@@ -643,7 +644,8 @@ Retrieve details of a specific order.
     "transaction": {
       "type": "transaction",
       "id": "01HXRPFZH8XNETP75TYBC1M42J",
-      "amount": "OOC 500",
+      "currency": "OOC",
+      "amount": "4.60",
       "status": "new"
     }
   }
@@ -729,7 +731,8 @@ Confirm an order via transaction ID.
     "transaction": {
       "type": "transaction",
       "id": "01HXRPFZH8XNETP75TYBC1M42J",
-      "amount": "OOC 500",
+      "currency": "OOC",
+      "amount": "4.60",
       "status": "paid",
       "paid_at": "2024-05-13 18:05:48"
     }
@@ -962,7 +965,8 @@ Example object:
   "transaction": {
     "type": "transaction",
     "id": "01HXGW60DV97K33QDG44BF8KWM",
-    "amount": "OOC 500",
+    "currency": "OOC",
+    "amount": "4.60",
     "status": "new"
   }
 }
