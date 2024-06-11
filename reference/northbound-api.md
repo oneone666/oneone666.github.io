@@ -194,24 +194,24 @@ Create a new order.
 
 ::: details Body Parameters
 
-| Parameter               | Type   | Required | Description                       |
-| ----------------------- | ------ | -------- | --------------------------------- |
-| merchant_transaction_id | string | yes      | Unique reference                  |
-| merchant_uuid           | string | yes      | Merchant UUID                     |
-| game_name               | string | yes      | Game name                         |
-| account_info            | array  | yes      | Game account info                 |
-| account_info.serverName | string | no      | Game character server name        |
-| account_info.loginId    | string | no      | Game character login ID           |
-| account_info.name       | string | yes      | Game character name               |
-| country                 | string | yes      | Country code in iso_3166_2 format |
-| payment_channel         | string | yes      | Payment channel                   |
-| amount_cents            | int    | yes      | Amount in cents                   |
-| currency                | string | yes      | Currency                          |
-| title                   | string | yes      | Title                             |
-| description             | string | no       | Description                       |
-| item_code               | string | no       | Item code                         |
-| merchant_return_url     | string | yes      | Merchant return URL               |
-| webhook_url             | string | no       | Webhook URL for callback          |
+| Parameter                | Type   | Required | Description                       |
+| ------------------------ | ------ | -------- | --------------------------------- |
+| merchant_transaction_id  | string | yes      | Unique reference                  |
+| merchant_uuid            | string | yes      | Merchant UUID                     |
+| game_name                | string | yes      | Game name                         |
+| account_info             | array  | yes      | Game account info                 |
+| account_info.server_name | string | no       | Game character server name        |
+| account_info.login_id    | string | no       | Game character login ID           |
+| account_info.name        | string | yes      | Game character name               |
+| country                  | string | yes      | Country code in iso_3166_2 format |
+| payment_channel          | string | yes      | Payment channel                   |
+| amount_cents             | int    | yes      | Amount in cents                   |
+| currency                 | string | yes      | Currency                          |
+| title                    | string | yes      | Title                             |
+| description              | string | no       | Description                       |
+| item_code                | string | no       | Item code                         |
+| merchant_return_url      | string | yes      | Merchant return URL               |
+| webhook_url              | string | no       | Webhook URL for callback          |
 
 :::
 
@@ -221,8 +221,8 @@ Create a new order.
   "merchant_uuid": "9bfdea04-d4c8-4f44-aa58-ff622d1285bf",
   "game_name": "ragnarok-origin-global",
   "account_info": {
-    "serverName": "Prontera",
-    "loginId": "FGHJK1234",
+    "server_name": "Prontera",
+    "login_id": "FGHJK1234",
     "name": "Kuro"
   },
   "payment_channel": "qr_promptpay_thb",
