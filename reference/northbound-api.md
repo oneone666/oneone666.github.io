@@ -227,7 +227,7 @@ Create a new order.
   },
   "payment_channel": "qr_promptpay_thb",
   "country": "MY",
-  "amount_cents": "1000",
+  "amount_cents": 1000,
   "currency": "MYR",
   "title": "Nyan Berry Pack (24,000)",
   "description": "Ragnarok Origin",
