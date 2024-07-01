@@ -128,6 +128,7 @@ Retrieve a list of all orders.
     {
       "type": "payment_transaction",
       "order_id": "01HXBENQCRV4W42NE4WC98QTGY",
+      "merchant_transaction_id": "some-unique-string",
       "reference": "reference-1234",
       "merchant_uuid": "9bfdea04-d4c8-4f44-aa58-ff622d1285bf",
       "game_name": "ragnarok-origin-global",
@@ -255,6 +256,7 @@ Create a new order.
   "data": {
     "type": "payment_transaction",
     "order_id": "01HXBENQCRV3W42NE4WC38QTGY",
+    "merchant_transaction_id": "some-unique-string",
     "reference": null,
     "merchant_uuid": "9bfdea14-d4c8-4f34-aa58-ff621d1285bf",
     "game_name": "ragnarok-origin-global",
@@ -344,6 +346,7 @@ Retrieve details of a specific order.
   "data": {
     "type": "payment_transaction",
     "order_id": "01HXBENQCRV4W42NE4WC98QTGY",
+    "merchant_transaction_id": "some-unique-string",
     "reference": null,
     "merchant_uuid": "9bfdea04-d4c8-4f44-aa58-ff622d1285bf",
     "game_name": "ragnarok-origin-global",
@@ -415,22 +418,23 @@ Ensure that your callback URL returns a 200 status code upon successful processi
 
 ## Order Transaction Object
 
-| Field           | Type   | Description      |
-| --------------- | ------ | ---------------- |
-| object          | string | Object type      |
-| order_id        | string | Order ID         |
-| reference       | string | Unique reference |
-| merchant_uuid   | string | Merchant UUID    |
-| game_name       | string | Game name        |
-| payment_channel | string | Payment channel  |
-| amount_cents    | int    | Amount in cents  |
-| currency        | string | Currency         |
-| title           | string | Title            |
-| description     | string | Description      |
-| item_code       | string | Item code        |
-| status          | string | Order status     |
-| paylink         | string | Payment link     |
-| verify_url      | string | Verification URL |
+| Field                   | Type   | Description                    |
+| ----------------------- | ------ | ------------------------------ |
+| object                  | string | Object type                    |
+| order_id                | string | Order ID                       |
+| merchant_transaction_id | string | Unique reference from merchant |
+| reference               | string | Unique reference               |
+| merchant_uuid           | string | Merchant UUID                  |
+| game_name               | string | Game name                      |
+| payment_channel         | string | Payment channel                |
+| amount_cents            | int    | Amount in cents                |
+| currency                | string | Currency                       |
+| title                   | string | Title                          |
+| description             | string | Description                    |
+| item_code               | string | Item code                      |
+| status                  | string | Order status                   |
+| paylink                 | string | Payment link                   |
+| verify_url              | string | Verification URL               |
 
 Example object:
 
@@ -438,6 +442,7 @@ Example object:
 {
   "type": "payment_transaction",
   "order_id": "01HXBGYT0GAGKV5QVTR1PQ4HJC",
+  "merchant_transaction_id": "some-unique-string",
   "reference": null,
   "merchant_uuid": "9bfdea04-d4c8-4f44-aa58-ff622d1285bf",
   "game_name": "ragnarok-origin-global",
