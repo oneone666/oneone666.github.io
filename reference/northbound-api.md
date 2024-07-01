@@ -398,7 +398,9 @@ After a successful payment, the transaction status will be updated to "paid". We
 
 ```json
 {
+  "type": "payment_transaction",
   "order_id": "01HW4S5YXS7GARVFX3PEVRRDS4",
+  "merchant_transaction_id": "some-unique-string",
   "reference": "569c420e-5739-3eb5-b52a-9a51ce38f0ba",
   "merchant_uuid": "25f0a63d-568f-3101-8181-86a595396e5d",
   "game_name": "ragnarok-origin-global",
