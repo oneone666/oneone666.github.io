@@ -422,7 +422,7 @@ Ensure that your callback URL returns a 200 status code upon successful processi
 
 | Field                   | Type   | Description                    |
 | ----------------------- | ------ | ------------------------------ |
-| object                  | string | Object type                    |
+| type                    | string | Object type                    |
 | order_id                | string | Order ID                       |
 | merchant_transaction_id | string | Unique reference from merchant |
 | reference               | string | Unique reference               |
