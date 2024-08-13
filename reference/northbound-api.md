@@ -390,6 +390,87 @@ Retrieve details of a specific order.
 
 :::
 
+<hr />
+
+### Get Webshop Order <Badge text="Requires authentication" type="warning"/>
+
+GET `/api/northbound/web-orders/{order_id}`
+
+Retrieve details of a specific order.
+
+::: details Headers
+
+| Header        | Type   | Required | Description  |
+| ------------- | ------ | -------- | ------------ |
+| Authorization | string | yes      | Bearer token |
+| X-Signature   | string | yes      | Signature    |
+
+:::
+
+::: details URL Parameters
+
+| Parameter | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| order_id  | string | yes      | Order ID    |
+
+:::
+
+::: details Response Fields
+
+| Field | Type   | Description                                             |
+| ----- | ------ | ------------------------------------------------------- |
+| order | object | [`Web Order Object`](#web-order-object) object |
+
+:::
+
+::: code-group
+
+```json [200]
+{
+  "status": "success",
+  "code": 200,
+  "error": null,
+  "data": {
+    "order_id": "01AGCTP5X0KCJC496FGDNJVEPC",
+    "reference": "c38d557e92b04e3cb23378020942a84a",
+    "merchant_uuid": "9bfdea04-d4c8-4f44-aa58-ff622d1285bf",
+    "game_name": "ragnarok-origin-global",
+    "payment_channel": "qr_promptpay_thb",
+    "amount_cents": 1000,
+    "currency": "MYR",
+    "item_code": "roo-item-246",
+    "status": "paid"
+  }
+}
+```
+
+```json [404]
+{
+  "status": "error",
+  "code": 404,
+  "error": {
+    "code": "RESOURCE_NOT_FOUND",
+    "message": "Resource not found"
+  },
+  "data": null
+}
+```
+
+```json [500]
+{
+  "status": "error",
+  "code": 500,
+  "error": {
+    "code": "SHOW_ERROR",
+    "message": "Failed to retrieve resource",
+    "tracking": "01cf630e-7f9c-49a3-badd-238ea7da7a72"
+  },
+  "data": null
+}
+```
+
+:::
+
 ## Callbacks
 
 ### Payment Success Callback
@@ -457,5 +538,37 @@ Example object:
   "status": "created",
   "paylink": "https://games.oneone.com/api/northbound/orders/01HXBGYT0GAGKV5QVTR1PQ4HJC",
   "verify_url": "https://games.oneone.com/api/northbound/transactions/01HXBGYT0GAGKV5QVTR1PQ4HJC"
+}
+```
+
+## Web Order Object
+
+| Field                   | Type   | Description                    |
+| ----------------------- | ------ | ------------------------------ |
+| type                    | string | Object type                    |
+| order_id                | string | Order ID                       |
+| reference               | string | Unique reference               |
+| merchant_uuid           | string | Merchant UUID                  |
+| game_name               | string | Game name                      |
+| payment_channel         | string | Payment channel                |
+| amount_cents            | int    | Amount in cents                |
+| currency                | string | Currency                       |
+| item_code               | string | Item code                      |
+| status                  | string | Order status                   |
+
+Example object:
+
+```json
+{
+  "type": "web_order",
+  "order_id": "01HGCTP5X0KCJC486FGDNJVEPC",
+  "reference": "c38d557e92b04e3cb23378020942a84a",
+  "merchant_uuid": "9c43dd5e-98e2-4464-8f8f-935bd35738a3",
+  "game_name": "ragnarok-origin-global",
+  "payment_channel": "telkomsel_airtime",
+  "amount_cents": 1500000,
+  "currency": "IDR",
+  "item_code": "com.gravity.roo.sea.op.cat40",
+  "status": "paid"
 }
 ```

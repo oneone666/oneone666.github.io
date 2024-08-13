@@ -98,6 +98,10 @@ export default defineConfig({
                 text: "Get Order",
                 link: "/reference/northbound-api#get-order",
               },
+              {
+                text: "Get Webshop Order",
+                link: "/reference/northbound-api#get-webshop-order",
+              },
             ],
           },
           {
