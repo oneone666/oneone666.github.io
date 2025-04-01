@@ -107,10 +107,6 @@ curl --request GET 'https://games.oneone.com/demo-api/orders' \
 
 This method ensures the integrity and authenticity of your API requests.
 
-::: tip
-Always sort the payload's JSON keys.
-:::
-
 ## Invalid Signature
 
 An invalid signature will result in a `403 Unauthorized` response. Ensure that the signature is correctly generated and included in the request header.
