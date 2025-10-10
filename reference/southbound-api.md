@@ -831,6 +831,152 @@ Retrieve current wallet balance.
 }
 ```
 
+<hr />
+
+### Get Payment <Badge text="Requires authentication" type="warning"/>
+
+GET `/api/southbound/payment/{ulid}`
+
+Retrieve details of a specific payment transaction.
+
+::: details Headers
+
+| Header        | Type   | Required | Description  |
+| ------------- | ------ | -------- | ------------ |
+| Authorization | string | yes      | Bearer token |
+| X-Signature   | string | yes      | Signature    |
+
+:::
+
+::: details Response Fields
+
+| Field | Type   | Description                              |
+| ----- | ------ |------------------------------------------|
+| data  | object | [`Payment Transaction`](#payment-transaction) |
+
+:::
+
+::: code-group
+
+```json [200]
+{
+  "status": "success",
+  "code": 200,
+  "error": null,
+  "data": {
+    "type": "payment_transaction",
+    "payment_transaction_id": "01JRFDBWZDE9XD17EZGRBPM5K5",
+    "reference": "RO-7539449-17442992546349647",
+    "game_name": "ragnarok-online-pc",
+    "payment_channel": "OOC_TH",
+    "amount_cents": 500000,
+    "currency": "OOC",
+    "title": "500 Cash",
+    "description": "Number of cash obtained : 500 Cash",
+    "item_code": "RO.500.ooc50",
+    "status": "created"
+  }
+}
+```
+
+```json [404]
+{
+  "status": "error",
+  "code": 404,
+  "error": {
+    "code": "RESOURCE_NOT_FOUND",
+    "message": "Resource not found"
+  },
+  "data": null
+}
+```
+
+```json [500]
+{
+  "status": "error",
+  "code": 500,
+  "error": {
+    "code": "SHOW_ERROR",
+    "message": "Failed to retrieve resource",
+    "tracking": "01cf630e-7f9c-49a3-badd-238ea7da7a72"
+  },
+  "data": null
+}
+```
+
+<hr />
+
+### Confirm Payment <Badge text="Requires authentication" type="warning"/>
+
+GET `/api/southbound/payment/{ulid}/confirm`
+
+Confirm payment transaction via payment transaction ULID.
+
+::: details Headers
+
+| Header        | Type   | Required | Description  |
+| ------------- | ------ | -------- | ------------ |
+| Authorization | string | yes      | Bearer token |
+| X-Signature   | string | yes      | Signature    |
+
+:::
+
+::: details Response Fields
+
+| Field | Type   | Description                                   |
+| ----- | ------ |-----------------------------------------------|
+| data  | object | [`Payment Transaction`](#payment-transaction) |
+
+:::
+
+::: code-group
+
+```json [200]
+{
+  "status": "success",
+  "code": 200,
+  "error": null,
+  "data": {
+    "type": "payment_transaction",
+    "payment_transaction_id": "01JRFDBWZDE9XD17EZGRBPM5K5",
+    "reference": "RO-7539449-17442992546349647",
+    "game_name": "ragnarok-online-pc",
+    "payment_channel": "OOC_TH",
+    "amount_cents": 500000,
+    "currency": "OOC",
+    "title": "500 Cash",
+    "description": "Number of cash obtained : 500 Cash",
+    "item_code": "RO.500.ooc50",
+    "status": "paid"
+  }
+}
+```
+
+```json [404]
+{
+  "status": "error",
+  "code": 404,
+  "error": {
+    "code": "RESOURCE_NOT_FOUND",
+    "message": "Resource not found"
+  },
+  "data": null
+}
+```
+
+```json [500]
+{
+  "status": "error",
+  "code": 500,
+  "error": {
+    "code": "SHOW_ERROR",
+    "message": "Failed to retrieve resource",
+    "tracking": "01cf630e-7f9c-49a3-badd-238ea7da7a72"
+  },
+  "data": null
+}
+```
+
 :::
 
 ## Response Objects
@@ -1014,6 +1160,44 @@ Example object:
     "id": "2c89c94c-efdc-4faa-b21a-7b0074f7acd5",
     "currency": "OOC",
     "value_cents": 4500
+  }
+}
+```
+
+### Payment Transaction
+
+| Field                  | Type    | Description             |
+|------------------------|---------|-------------------------|
+| type                   | string  | Object type             |
+| payment_transaction_id | string  | Pyament Transaction ID  |
+| reference              | string  | Merchant Transaction ID |
+| game_name              | string  | Game Name               |
+| payment_channel        | string  | Payment Channel         |
+| amount_cents           | integer | Amount                  |
+| currency               | string  | Currency                |
+| title                  | string  | Game Item Title         |
+| description            | string  | Game Item Description   |
+| item_code              | string  | Game item Code          |
+| status                 | string  | Payment Status          |
+
+
+```json
+{
+  "status": "success",
+  "code": 200,
+  "error": null,
+  "data": {
+    "type": "payment_transaction",
+    "payment_transaction_id": "01JRFDBWZDE9XD17EZGRBPM5K5",
+    "reference": "RO-7539449-17442992546349647",
+    "game_name": "ragnarok-online-pc",
+    "payment_channel": "OOC_TH",
+    "amount_cents": 500000,
+    "currency": "OOC",
+    "title": "500 Cash",
+    "description": "Number of cash obtained : 500 Cash",
+    "item_code": "RO.500.ooc50",
+    "status": "paid"
   }
 }
 ```
