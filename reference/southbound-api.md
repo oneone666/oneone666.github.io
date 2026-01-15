@@ -1094,7 +1094,7 @@ Example object:
 | character_id   | string | Game character ID   |
 | character_name | string | Game character name |
 | item           | string | Item name           |
-| status         | string | Order status        |
+| status         | string | Order status, can be `new`, `pending`, `paid`, `failed` |
 | total_price    | string | Total price         |
 | transaction    | object | Transaction object  |
 
@@ -1126,7 +1126,7 @@ Example object:
 | id      | string | Transaction ID     |
 | currency  | string | Transaction currency |
 | amount  | string | Transaction amount |
-| status  | string | Transaction status |
+| status  | string | Transaction status, can be `new`, `pending`, `paid`, `failed` |
 | paid_at | string | Payment date       |
 
 Example object:
@@ -1178,7 +1178,7 @@ Example object:
 | title                  | string  | Game Item Title         |
 | description            | string  | Game Item Description   |
 | item_code              | string  | Game item Code          |
-| status                 | string  | Payment Status          |
+| status                 | string  | Payment Status, can be `created`, `pending`, `paid`, `cancelled`, `failed` , `expired`|
 
 
 ```json

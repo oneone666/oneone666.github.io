@@ -111,6 +111,10 @@ This method ensures the integrity and authenticity of your API requests.
 
 An invalid signature will result in a `403 Unauthorized` response. Ensure that the signature is correctly generated and included in the request header.
 
+::: tip
+A gentle reminder, for the empty value key, please use `null` instead of an empty string `""`, or remove the key-value pair.
+:::
+
 Example response of missing signature:
 
 ```json
