@@ -1094,7 +1094,7 @@ Example object:
 | character_id   | string | Game character ID   |
 | character_name | string | Game character name |
 | item           | string | Item name           |
-| status         | string | Order status, can be `new`, `pending`, `paid`, `failed` |
+| status         | string | Order status, can be `new`, `pending`, `completed`, `cancelled` |
 | total_price    | string | Total price         |
 | transaction    | object | Transaction object  |
 
