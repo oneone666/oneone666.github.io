@@ -58,7 +58,8 @@ export default defineConfig({
             {
                 text: "Reference",
                 items: [
-                    {text: "Northbound API", link: "/reference/northbound-api"},
+                    {text: "Northbound API V1", link: "/reference/northbound-api"},
+                    {text: "Northbound API V2", link: "/reference/northbound-api-v2"},
                     {text: "Southbound API", link: "/reference/southbound-api"},
                 ],
             },
@@ -79,7 +80,7 @@ export default defineConfig({
                 text: "Reference",
                 items: [
                     {
-                        text: "Northbound API",
+                        text: "Northbound V1",
                         link: "/reference/northbound-api",
                         items: [
                             {
@@ -101,6 +102,36 @@ export default defineConfig({
                             {
                                 text: "Get Webshop Order",
                                 link: "/reference/northbound-api#get-webshop-order",
+                            },
+                        ],
+                    },
+                    {
+                        text: "Northbound V2",
+                        link: "/reference/northbound-api-v2",
+                        items: [
+                            {
+                                text: "Authentication",
+                                link: "/reference/northbound-api-v2#authentication",
+                            },
+                            {
+                                text: "Signature",
+                                link: "/reference/northbound-api-v2#signature",
+                            },
+                            {
+                                text: "List Orders",
+                                link: "/reference/northbound-api-v2#list-orders",
+                            },
+                            {
+                                text: "Create Order",
+                                link: "/reference/northbound-api-v2#create-order",
+                            },
+                            {
+                                text: "Get Order",
+                                link: "/reference/northbound-api-v2#get-order",
+                            },
+                            {
+                                text: "Callback",
+                                link: "/reference/northbound-api-v2#payment-success",
                             },
                         ],
                     },
