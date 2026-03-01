@@ -16,7 +16,7 @@ Bearer {API_KEY}
 
 ## Signature
 
-To secure your requests, include an X-Signature header in every call. This signature is generated using HMAC-SHA256 with your API secret key.
+To secure your requests, include an `X-Signature` header in every call. This signature is generated using HMAC-SHA256 with your API secret key.
 
 Construct the string to be signed by joining the following components with a newline character (\n):
 
