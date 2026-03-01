@@ -114,7 +114,7 @@ Retrieve a list of all orders.
 
 | Field | Type  | Description                                                      |
 | ----- | ----- | ---------------------------------------------------------------- |
-| data  | array | List of [`Order Transaction`](#order-transaction-object) objects |
+| data  | array | List of `Order Transaction` objects |
 | links | array | Pagination links                                                 |
 | meta  | array | Pagination metadata                                              |
 
