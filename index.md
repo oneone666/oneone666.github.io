@@ -6,7 +6,7 @@ hero:
   text: "API Documentations"
   tagline: Developer documentation for the most preferred digital payment solution partner.
   image:
-    src: https://oneone.com/assets/main-banner-visual-d048757b.png
+    src: https://www.oneverseglobal.com/_nuxt/ooc-credit.CpVJ-ItE.webp
     alt: Oneverse
   actions:
     - theme: brand
