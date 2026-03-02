@@ -179,7 +179,7 @@ Create a new order.
 | game_name           | string | yes      | Game name                         |
 | country             | string | yes      | Country code in iso_3166_2 format |
 | payment_channel     | string | yes      | Payment channel                   |
-| amount_cents        | int    | yes      | Amount in cents                   |
+| amount_cents        | string | yes      | Numeric amount in cents           |
 | currency            | string | yes      | Currency                          |
 | item_title          | string | yes      | Title                             |
 | item_description    | string | no       | Description                       |
@@ -195,17 +195,17 @@ Create a new order.
 
 ```json
 {
-  "transaction_id": "some-unique-string",
+  "transaction_id": "f1275362-0597-4264-8af7-864cb5f3f039",
   "tenant_id": "01KGKW7222XT1WACCWA6MK7888",
   "game_name": "ragnarok-origin-global",
   "payment_channel": "qr_promptpay_thb",
   "country": "MY",
-  "amount_cents": 1000,
+  "amount_cents": "1000",
   "currency": "MYR",
-  "title": "Nyan Berry Pack (24,000)",
-  "description": "Ragnarok Origin",
+  "item_title": "Nyan Berry Pack (24,000)",
+  "item_description": "Ragnarok Origin",
   "item_code": "roo-item-246",
-  "merchant_return_url": "https://example.com",
+  "return_url": "https://example.com",
   "webhook_url": "https://example.com/webhook",
   "account": {
     "server_name": "Prontera",
@@ -299,7 +299,7 @@ Retrieve details of a specific order.
     "tenant_id": "01KGKW7222XT1WACCWA6MK7888",
     "game_name": "ragnarok-origin-global",
     "payment_channel": "qr_promptpay_thb",
-    "amount_cents": 1000,
+    "amount_cents": "1000",
     "currency": "MYR",
     "item_title": "Nyan Berry Pack (24,000)",
     "item_description": "Ragnarok Origin",
@@ -347,7 +347,7 @@ After a successful payment, we will send a POST request to your callback URL wit
     "tenant_id": "01KGKW7222XT1WACCWA6MK7888",
     "game_name": "ragnarok-origin-global",
     "payment_channel": "qr_promptpay_thb",
-    "amount_cents": 1000,
+    "amount_cents": "1000",
     "currency": "MYR",
     "item_title": "Nyan Berry Pack (24,000)",
     "item_description": "Ragnarok Origin",
