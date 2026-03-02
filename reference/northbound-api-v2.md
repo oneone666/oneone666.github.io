@@ -24,6 +24,18 @@ Construct the string to be signed by joining the following components with a new
 [METHOD]\n[URI]\n[BODY]
 ```
 
+### Payload Examples
+
+```
+# with body
+POST\nhttps://games.oneone.com/api\n{"foo":"bar"}
+
+# without body
+GET\nhttps://games.oneone.com/api\n
+```
+
+### Code Examples
+
 ::: code-group
 
 ```TS
