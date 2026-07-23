@@ -1,39 +1,36 @@
 # Signing API Requests
 
-The signed request adds an extra layer of security by signing your API requests with a secret key. This guide explains how to sign your requests and send them to the server.
+Sign each authenticated API request with your secret key and send the result in the `X-Signature` header.
 
 ::: tip
-Your secret key, unique to your account, serves as your signature key and must be kept confidential.
+The secret key returned by the Login endpoint is unique to your reseller account. Keep it confidential and generate signatures only on your server.
 :::
 
 ## Signature Algorithm
 
-The signature algorithm uses the HMAC SHA256 hashing algorithm to sign your API requests. The signature ensures the integrity and authenticity of your requests.
+Sign the request data using HMAC-SHA256 and encode the result as a lowercase hexadecimal string.
 
 ::: warning
-To ensure the security of your API credentials, it's recommended that API signatures are not generated on the frontend, as this could lead to potential exposure of sensitive information.
+HMAC signing is not encryption. It verifies that a request was created by a client that has the secret key and that the signed request data was not changed.
 :::
 
-## How It Works
+## Build the Signature
 
-1. **Get your secret key:** First, get a secret key specific to your account.
-2. **Build the data string:** Construct the data string with the request method, URL, and payload.
-3. **Sign your request:** Use your secret key to sign the data string.
-4. **Send the signed request:** Transmit the signed request to the server.
+The signature is calculated from:
 
-::: tip
-Ensure that you sign your requests using the `HMACSHA256` algorithm.
+- The uppercase HTTP method
+- The complete request URL
+- The compact JSON request body, when a body is present
+
+Join each value with one newline character (`\n`). Do not add a newline after the final value.
+
+::: warning
+Do not sort the JSON keys. Create one compact JSON string and use that same string both when calculating the signature and as the HTTP request body.
 :::
-
-## Examples
-
-- [Request With Payload](#request-with-payload)
-- [Request Without Payload](#request-without-payload)
-- [Add the Signature to Request Header](#x-signature-header)
 
 ### Request With Payload
 
-If your request contains payload like this:
+For this request:
 
 ```json
 {
@@ -42,74 +39,129 @@ If your request contains payload like this:
 }
 ```
 
-Sort the payload's JSON keys alphabetically and compact it:
+Create a compact JSON string. The key order must remain unchanged:
 
 ```plaintext
-{"baz":"qux","foo":"bar"}
+{"foo":"bar","baz":"qux"}
 ```
 
-Construct the data string by concatenating the HTTP method, URL, and JSON-encoded payload in this format:
+For a `POST` request to `https://games.oneone.com/demo-api/orders`, sign this exact string:
 
 ```plaintext
-<HTTP-Method>\n<HTTP-URI>\n<payload>
+POST
+https://games.oneone.com/demo-api/orders
+{"foo":"bar","baz":"qux"}
 ```
 
-For example, when sending a POST request to https://games.oneone.com/demo-api/orders with the provided payload, the data string should be:
-
-```plaintext
-POST\n
-https://games.oneone.com/demo-api/orders\n
-{"baz":"qux","foo":"bar"}
-```
-
-Hash the data string with the secret key using the HMAC SHA256 algorithm:
-
-```php
-hash_hmac('sha256', $data, 'secret_value');
-```
-
-The hashed value from the example should be `d46691367c13a98fe93e9cb2d4de6010792bb670e2e5a63b24765e950a1c9d73`.
+The invisible separators between the three lines above are single `\n` characters.
 
 ### Request Without Payload
 
-If your request does not contain a payload, construct the data string by concatenating the HTTP method and URL in this format:
+For a request without a body, sign only the method and complete URL:
 
 ```plaintext
-<HTTP-Method>\n<HTTP-URI>
-```
-
-For instance, when sending a GET request to https://games.oneone.com/demo-api/orders, the data string should be:
-
-```plaintext
-GET\n
+GET
 https://games.oneone.com/demo-api/orders
 ```
 
-Hash the data string with the secret key using the HMAC SHA256 algorithm:
+The complete URL includes the query string. Its parameter order and encoding must match the URL sent to the API.
 
-```php
-hash_hmac('sha256', $data, 'secret_value');
+## Code Examples
+
+The following examples generate the same lowercase hexadecimal signature. The `body` variable must also be used as the HTTP request body.
+
+::: code-group
+
+```javascript [JavaScript]
+const crypto = require('crypto');
+
+const secretKey = 'your-secret-key';
+const method = 'POST';
+const url = 'https://games.oneone.com/demo-api/orders';
+const body = JSON.stringify({
+  foo: 'bar',
+  baz: 'qux',
+});
+
+const data = `${method}\n${url}\n${body}`;
+const signature = crypto
+  .createHmac('sha256', secretKey)
+  .update(data, 'utf8')
+  .digest('hex');
 ```
 
-The hashed value from the example should be `c6056f6fbd2ba8016373619de793b37eb4f45c975af49b2919e3809a7ffe816f`.
+```php [PHP]
+<?php
+
+$secretKey = 'your-secret-key';
+$method = 'POST';
+$url = 'https://games.oneone.com/demo-api/orders';
+$body = json_encode([
+    'foo' => 'bar',
+    'baz' => 'qux',
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
+$data = implode("\n", [$method, $url, $body]);
+$signature = hash_hmac('sha256', $data, $secretKey);
+```
+
+```python [Python]
+import hashlib
+import hmac
+import json
+
+secret_key = "your-secret-key"
+method = "POST"
+url = "https://games.oneone.com/demo-api/orders"
+body = json.dumps(
+    {
+        "foo": "bar",
+        "baz": "qux",
+    },
+    ensure_ascii=False,
+    separators=(",", ":"),
+)
+
+data = f"{method}\n{url}\n{body}"
+signature = hmac.new(
+    secret_key.encode("utf-8"),
+    data.encode("utf-8"),
+    hashlib.sha256,
+).hexdigest()
+```
+
+:::
+
+::: warning
+Do not serialize the request body again after generating the signature. Send the exact value stored in `body`.
+:::
 
 ## X-Signature Header
 
-Once you have the hashed value, include it in the `X-Signature` header for every API request. For example:
+Include the lowercase hexadecimal signature in the `X-Signature` header:
 
 ```bash
 curl --request GET 'https://games.oneone.com/demo-api/orders' \
---header 'Content-Type: application/json' \
---header 'X-Signature: d46691367c13a98fe93e9cb2d4de6010792bb670e2e5a63b24765e950a1c9d73' \
---header 'Authorization: Bearer 123|lN7SSRDMDAvpJGve4VWabxanL5fZPN9vv6OCJ6IKee413ad8' \
---data-raw '{"foo": "bar", "baz": "qux"}'
+  --header 'Accept: application/json' \
+  --header 'X-Signature: <lowercase-hex-signature>' \
+  --header 'Authorization: Bearer <token>'
 ```
 
-This method ensures the integrity and authenticity of your API requests.
+For requests with a JSON body, also send `Content-Type: application/json`.
+
+## Common Signature Mismatches
+
+- Sorting JSON keys before signing
+- Signing formatted JSON but sending compact JSON, or the reverse
+- Serializing the request body a second time after signing
+- Omitting query parameters from the signed URL
+- Changing query parameter order or URL encoding after signing
+- Adding an extra newline at the end of the signature data
+- Returning Base64 instead of lowercase hexadecimal output
 
 ## Invalid Signature
 
-An invalid signature will result in a `403 Unauthorized` response. Ensure that the signature is correctly generated and included in the request header.
+An invalid or missing signature returns an HTTP `403` response.
 
 ::: tip
 A gentle reminder, for the empty value key, please use `null` instead of an empty string `""`, or remove the key-value pair.

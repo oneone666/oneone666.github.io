@@ -61,6 +61,7 @@ export default defineConfig({
                     {text: "Northbound API V1", link: "/reference/northbound-api"},
                     {text: "Northbound API V2", link: "/reference/northbound-api-v2"},
                     {text: "Southbound API", link: "/reference/southbound-api"},
+                    {text: "Southbound API V2", link: "/reference/southbound-api-v2"},
                 ],
             },
         ],
@@ -136,7 +137,7 @@ export default defineConfig({
                         ],
                     },
                     {
-                        text: "Southbound API",
+                        text: "Southbound V1",
                         link: "/reference/southbound-api",
                         items: [
                             {
@@ -178,14 +179,52 @@ export default defineConfig({
                             {
                                 text: "Get Wallet Balance",
                                 link: "/reference/southbound-api#get-wallet-balance",
+                            }
+                        ],
+                    },
+                    {
+                        text: "Southbound V2",
+                        link: "/reference/southbound-api-v2",
+                        items: [
+                            {
+                                text: "Login",
+                                link: "/reference/southbound-api-v2#login",
                             },
                             {
-                                text: "Get Payment",
-                                link: "/reference/southbound-api#get-payment",
+                                text: "List Games",
+                                link: "/reference/southbound-api-v2#list-games",
                             },
                             {
-                                text: "Confirm Payment",
-                                link: "/reference/southbound-api#confirm-payment",
+                                text: "Show Game Information",
+                                link: "/reference/southbound-api-v2#show-game-information",
+                            },
+                            {
+                                text: "List Game Servers",
+                                link: "/reference/southbound-api-v2#list-game-servers",
+                            },
+                            {
+                                text: "List Game Items",
+                                link: "/reference/southbound-api-v2#list-game-items",
+                            },
+                            {
+                                text: "Verify Account",
+                                link: "/reference/southbound-api-v2#verify-account",
+                            },
+                            {
+                                text: "Create Order",
+                                link: "/reference/southbound-api-v2#create-order",
+                            },
+                            {
+                                text: "Get Order",
+                                link: "/reference/southbound-api-v2#get-order",
+                            },
+                            {
+                                text: "Confirm Order",
+                                link: "/reference/southbound-api-v2#confirm-order",
+                            },
+                            {
+                                text: "Get Wallet Balance",
+                                link: "/reference/southbound-api-v2#get-wallet-balance",
                             },
                         ],
                     },
