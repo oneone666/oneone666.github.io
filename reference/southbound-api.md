@@ -865,16 +865,19 @@ Retrieve details of a specific payment transaction.
   "error": null,
   "data": {
     "type": "payment_transaction",
-    "payment_transaction_id": "01JRFDBWZDE9XD17EZGRBPM5K5",
-    "reference": "RO-7539449-17442992546349647",
-    "game_name": "ragnarok-online-pc",
-    "payment_channel": "OOC_TH",
-    "amount_cents": 500000,
+    "payment_transaction_id": "01KYP3Q4YZYGKPYKZMM96QZ02Y",
+    "reference": "ef6089e6264f411c94da173967643ae5",
+    "game_name": "ragnarok-origin-classic",
+    "item_price_currency": "MYR",
+    "item_price_amount": 7340,
+    "payment_channel": "OOC_ID",
+    "amount_cents": 9828,
     "currency": "OOC",
-    "title": "500 Cash",
-    "description": "Number of cash obtained : 500 Cash",
-    "item_code": "RO.500.ooc50",
-    "status": "created"
+    "title": "Ragnarok Origin Classic",
+    "description": "Ragnarok Origin Classic",
+    "item_code": "com.gravity.rooc.official.m1",
+    "status": "created",
+    "has_sufficient_funds": true
   }
 }
 ```
@@ -938,16 +941,19 @@ Confirm payment transaction via payment transaction ULID.
   "error": null,
   "data": {
     "type": "payment_transaction",
-    "payment_transaction_id": "01JRFDBWZDE9XD17EZGRBPM5K5",
-    "reference": "RO-7539449-17442992546349647",
-    "game_name": "ragnarok-online-pc",
-    "payment_channel": "OOC_TH",
-    "amount_cents": 500000,
+    "payment_transaction_id": "01KYP0C3T429YXTJC9FRX5266G",
+    "reference": "1785297482090",
+    "game_name": "ragnarok-m-classic",
+    "item_price_currency": "MYR",
+    "item_price_amount": 1320,
+    "payment_channel": "OOC_ID",
+    "amount_cents": 1756,
     "currency": "OOC",
-    "title": "500 Cash",
-    "description": "Number of cash obtained : 500 Cash",
-    "item_code": "RO.500.ooc50",
-    "status": "paid"
+    "title": "Nyan Berry Pack (24,000)",
+    "description": "Ragnarok",
+    "item_code": "roo-item-246",
+    "status": "paid",
+    "has_sufficient_funds": null
   }
 }
 ```
@@ -1166,19 +1172,22 @@ Example object:
 
 ### Payment Transaction
 
-| Field                  | Type    | Description             |
-|------------------------|---------|-------------------------|
-| type                   | string  | Object type             |
-| payment_transaction_id | string  | Pyament Transaction ID  |
-| reference              | string  | Merchant Transaction ID |
-| game_name              | string  | Game Name               |
-| payment_channel        | string  | Payment Channel         |
-| amount_cents           | integer | Amount                  |
-| currency               | string  | Currency                |
-| title                  | string  | Game Item Title         |
-| description            | string  | Game Item Description   |
-| item_code              | string  | Game item Code          |
-| status                 | string  | Payment Status, can be `created`, `pending`, `paid`, `cancelled`, `failed` , `expired`|
+| Field                  | Type             | Description                                                                             |
+|------------------------|------------------|-----------------------------------------------------------------------------------------|
+| type                   | string           | Object type                                                                             |
+| payment_transaction_id | string           | Payment transaction ID                                                                  |
+| reference              | string           | Merchant transaction ID                                                                 |
+| game_name              | string           | Game name                                                                               |
+| item_price_currency    | string           | Currency of the game item price                                                         |
+| item_price_amount      | integer          | Game item price amount                                                                  |
+| payment_channel        | string           | Payment channel                                                                         |
+| amount_cents           | integer          | Payment amount in the payment currency's smallest unit                                  |
+| currency               | string           | Payment currency                                                                        |
+| title                  | string           | Game item title                                                                         |
+| description            | string           | Game item description                                                                   |
+| item_code              | string           | Game item code                                                                          |
+| status                 | string           | Payment status: `created`, `pending`, `paid`, `cancelled`, `failed`, or `expired`       |
+| has_sufficient_funds   | boolean or null  | Whether sufficient funds are available; `null` when the value is no longer applicable  |
 
 
 ```json
@@ -1188,16 +1197,19 @@ Example object:
   "error": null,
   "data": {
     "type": "payment_transaction",
-    "payment_transaction_id": "01JRFDBWZDE9XD17EZGRBPM5K5",
-    "reference": "RO-7539449-17442992546349647",
-    "game_name": "ragnarok-online-pc",
-    "payment_channel": "OOC_TH",
-    "amount_cents": 500000,
+    "payment_transaction_id": "01KYP0C3T429YXTJC9FRX5266G",
+    "reference": "1785297482090",
+    "game_name": "ragnarok-m-classic",
+    "item_price_currency": "MYR",
+    "item_price_amount": 1320,
+    "payment_channel": "OOC_ID",
+    "amount_cents": 1756,
     "currency": "OOC",
-    "title": "500 Cash",
-    "description": "Number of cash obtained : 500 Cash",
-    "item_code": "RO.500.ooc50",
-    "status": "paid"
+    "title": "Nyan Berry Pack (24,000)",
+    "description": "Ragnarok",
+    "item_code": "roo-item-246",
+    "status": "paid",
+    "has_sufficient_funds": null
   }
 }
 ```
