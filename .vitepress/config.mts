@@ -179,7 +179,15 @@ export default defineConfig({
                             {
                                 text: "Get Wallet Balance",
                                 link: "/reference/southbound-api#get-wallet-balance",
-                            }
+                            },
+                            {
+                                text: "Get Payment",
+                                link: "/reference/southbound-api#get-payment",
+                            },
+                            {
+                                text: "Confirm Payment",
+                                link: "/reference/southbound-api#confirm-payment",
+                            },
                         ],
                     },
                     {
